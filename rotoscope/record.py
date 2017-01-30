@@ -10,7 +10,7 @@ from os import listdir
 from os.path import isfile, join
 
 # Our API
-from rotoscope import rotoscope
+import rotoscope
 
 # Given an image name, finds the index inside the json
 def lookForImageInJSON(json, image):
@@ -41,14 +41,15 @@ jsonPath = join(path, sys.argv[2])
 
 # State variables
 currentCorner = 0
-imageIndex = 0
+imageIndex = 32
 lastClick = None
 endKeys = [113, 27]
 
 # Image to be rotoscopied
-textSize = 100, 80, 3
+textSize = 200, 160, 3
 # text = np.zeros(textSize, dtype=np.uint8)
-text = cv2.imread('text.png')
+# text = cv2.imread('text.png')
+text = rotoscope.generateText("TEST TEXT")
 
 # Load Json
 jsonFrames = json.load(open(jsonPath))
@@ -112,7 +113,7 @@ while(not key in endKeys):
 	image = cv2.imread(imagePath)
 
 	# Apply Rotoscope
-	rotoscope(image, text, imageData)
+	image = rotoscope.rotoscope(image, text, imageData)
 
 	# Render corners
 	corners = imageData['corners']
@@ -120,7 +121,11 @@ while(not key in endKeys):
 		color = (30, 255, 30) if c == currentCorner else (200, 200, 200)
 		if imageData['show'] == False:
 			color = (150, 150, 150)
-		cv2.circle(image, totuple(corners[c]), 2, color, 2)
+
+		x, y = totuple(corners[c])
+		x = int(x)
+		y = int(y)
+		cv2.circle(image, (x, y), 2, color, 2)
 	
 	# Show image
 	cv2.imshow('view', image)
@@ -129,11 +134,6 @@ while(not key in endKeys):
 	key = -1
 	while(key < 0 and lastClick == None):
 		key = cv2.waitKey(50)
-
-	# Wait key release
-	# while(cv2.waitKey(10) > 0):
-	# 	continue
-
 	print(key, lastClick)
 
 	# Check if next/previous image
@@ -154,13 +154,13 @@ while(not key in endKeys):
 	elif key == 115: # key: s (show/noShow)
 		imageData['show'] = not imageData['show']
 	elif key == 0: # key UP
-		imageData['corners'][currentCorner][1] -= 1
+		imageData['corners'][currentCorner][1] -= 0.5
 	elif key == 1: # key DOWN
-		imageData['corners'][currentCorner][1] += 1
+		imageData['corners'][currentCorner][1] += 0.5
 	elif key == 2: # key LEFT
-		imageData['corners'][currentCorner][0] -= 1
+		imageData['corners'][currentCorner][0] -= 0.5
 	elif key == 3: # key RIGHT
-		imageData['corners'][currentCorner][0] += 1
+		imageData['corners'][currentCorner][0] += 0.5
 	elif lastClick != None: 
 		# Change current corner position
 		imageData['corners'][currentCorner] = lastClick

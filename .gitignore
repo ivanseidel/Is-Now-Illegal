@@ -1,0 +1,17 @@
+# OS X
+.DS_Store
+
+# Nodejs
+node_modules/
+
+# Output files
+rotoscope/output.git
+
+*.swp
+*.swo
+*.pyc
+npm-debug.log
+
+# Tmp folders/files
+tmp/*
+.tmp/
