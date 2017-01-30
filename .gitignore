@@ -5,7 +5,7 @@
 node_modules/
 
 # Output files
-rotoscope/output.git
+rotoscope/output.gif
 
 *.swp
 *.swo
