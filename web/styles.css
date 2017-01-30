@@ -1,0 +1,168 @@
+/* RESET */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* APP */
+
+* {
+  box-sizing: border-box;
+  transition: all ease-in 0.1s;
+}
+
+body {
+  background-color: orange;
+  font-family: 'Old Standard TT', serif;
+}
+
+.page {
+  height: 100%;
+  background-color: #2b325f;
+  padding: 20px;
+  border: 0 solid #fff;
+  border-width: 4px 0;
+}
+
+input, button {
+  padding: 10px 20px;
+  font-size: 24px;
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid transparent;
+}
+
+button {
+  text-align: center;
+}
+
+input:focus, button:focus {
+    outline:none;
+}
+
+form:active {
+    transform: scale(1.1);
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 36px;
+  text-align: center;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 30px;
+  }
+}
+
+.center-box {
+  margin: auto;
+  margin-top: 15%;
+  width: 50%;
+}
+
+@media (max-width: 1000px) {
+  .center-box {
+    width: 60%;
+  }
+}
+
+@media (max-width: 800px) {
+  .center-box {
+    width: 80%;
+  }
+}
+
+@media (max-width: 600px) {
+  .center-box {
+    width: 100%;
+  }
+}
+
+form {
+  padding: 10px;
+  background-color: #820408;
+  border-radius: 4px;
+}
+
+@media (min-width: 600px) {
+  form {
+    display: flex;
+  }
+}
+
+form:hover, form:hover button {
+  background-color: #9a0207;
+}
+
+form input, form button {
+  border-radius: 4px;
+}
+
+form button {
+  background-color: transparent;
+}
+
+form button:hover {
+  background-color: transparent;
+}
+
+form input[type=text] {
+  flex: 1;
+  background-color: #fff;
+  color: #2b325f;
+}
+
+form button {
+  text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+  form input, form button {
+    width: 100%;
+  }
+
+  form button {
+    margin-top: 10px;
+  }
+}
