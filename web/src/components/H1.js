@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export default styled.h1`
   margin-bottom: 20px;
-  font-size: 36px;
+  font-size: 44px;
   text-align: center;
   color: #fff;
   

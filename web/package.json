@@ -2,11 +2,12 @@
   "name": "isnowillegal",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://ivanseidel.github.io/Is-Now-Illegal/web/build",
+  "homepage": "https://ivanseidel.github.io/Is-Now-Illegal",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "deploy": "npm run build&&gh-pages -d build",
     "eject": "react-scripts eject",
     "lint": "eslint ./src"
   },
@@ -21,6 +22,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.9.0",
+    "gh-pages": "^0.12.0",
     "react-scripts": "0.8.5"
   },
   "author": {
