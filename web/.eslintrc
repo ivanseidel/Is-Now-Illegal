@@ -15,6 +15,7 @@
     "react"
   ],
   "rules": {
+    "arrow-parens": 0,
     "react/jsx-filename-extension": ["off"]
   }
 }
