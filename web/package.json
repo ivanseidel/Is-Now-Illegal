@@ -2,6 +2,7 @@
   "name": "isnowillegal",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://ivanseidel.github.io/Is-Now-Illegal/web/build",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -11,7 +12,8 @@
   },
   "dependencies": {
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "styled-components": "^1.4.2"
   },
   "devDependencies": {
     "eslint": "^3.13.0",
@@ -20,5 +22,11 @@
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.9.0",
     "react-scripts": "0.8.5"
-  }
+  },
+  "author": {
+    "name": "Bruno Lemos",
+    "email": "brunohplemos@gmail.com",
+    "url": "https://twitter.com/brunolemos"
+  },
+  "contributors": []
 }
