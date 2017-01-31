@@ -29,7 +29,6 @@ const FormInput = styled(Input)`
 
 const FormButton = styled(Button)`
   background-color: transparent;
-  text-transform: uppercase;
   
   @media (max-width: 600px) {
     width: 100%;
@@ -49,6 +48,7 @@ const StyledForm = styled(Form)`
   min-height: 70px;
   padding: 10px;
   background-color: #ed2127;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
 `;
 
 class App extends Component {
