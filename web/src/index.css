@@ -1,6 +1,8 @@
 * {
   box-sizing: border-box;
   transition: all ease-in 0.1s;
+  font-family: 'Alfa Slab One', 'sans-serif', Verdana;
+  font-weight: bold;
 }
 
 html, body, #root {
@@ -9,5 +11,6 @@ html, body, #root {
 }
 
 body {
-  font-family: 'Old Standard TT', serif;
+  font-family: 'Alfa Slab One', 'sans-serif', Verdana;
+  font-weight: bold;
 }
