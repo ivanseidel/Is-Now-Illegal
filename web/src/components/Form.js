@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export default styled.form`
   border-radius: ${({ radius }) => radius || 0}px;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
 
   @media (min-width: 600px) {
     display: flex;
