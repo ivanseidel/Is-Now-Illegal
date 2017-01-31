@@ -9,6 +9,7 @@ import MainPage from './pages/MainPage';
 import SharePage from './pages/SharePage';
 import { colors } from './styles/variables';
 
+// fix github page router path handler
 const basename = window.location.hostname.indexOf('github') >= 0 &&
   window.location.pathname.split('/')[1]
   ? `/${window.location.pathname.split('/')[1]}`
