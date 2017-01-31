@@ -9,6 +9,11 @@ import MainPage from './pages/MainPage';
 import SharePage from './pages/SharePage';
 import { colors } from './styles/variables';
 
+const basename = window.location.hostname.indexOf('github') >= 0 &&
+  window.location.pathname.split('/')[1]
+  ? `/${window.location.pathname.split('/')[1]}`
+  : undefined;
+
 export default class extends Component {
   state = { backgroundColor: colors.blue };
 
@@ -20,7 +25,7 @@ export default class extends Component {
     const { backgroundColor } = this.state;
 
     return (
-      <Router>
+      <Router basename={basename}>
         <PageContainer background={backgroundColor}>
           <Route
             exact
