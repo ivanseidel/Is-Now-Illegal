@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Clipboard from 'clipboard';
 import styled from 'styled-components';
+import download from 'downloadjs';
+import { withRouter } from 'react-router-dom';
 
 import Button from '../components/Button';
 import CenterBox from '../components/CenterBox';
@@ -25,8 +27,25 @@ const Gif = styled.img`
   min-height: 300px;
 `;
 
+const ShareContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: ${padding}px;
+`;
+
+const SocialButtons = styled.div`
+  flex: 1;
+`;
+
+const DownloadButton = styled(Button)`
+  margin-left: ${padding / 2}px;
+  background-color: #3d3e3d;
+  color: #fff;
+`;
+
 const Footer = styled.div`
   display: flex;
+  align-items: center;
   margin: -${padding}px;
   margin-top: ${padding}px;
   padding: ${padding / 2}px;
@@ -37,7 +56,6 @@ const Footer = styled.div`
 
 const ShareLink = styled.a`
   flex: 1;
-  align-self: center;
   color: #fff;
   text-align: right;
   text-decoration: none;
@@ -47,7 +65,7 @@ const ShareLink = styled.a`
 `;
 
 const CopyButton = styled(Button)`
-  margin-left: ${padding}px;
+  margin-left: ${padding / 2}px;
   background-color: transparent;
   border-color: #fff;
   font-size: 12px;
@@ -56,7 +74,7 @@ const CopyButton = styled(Button)`
   opacity: 0.95;
 `;
 
-export default class extends Component {
+class SharePage extends Component {
   static defaultProps = { backgroundColor: colors.red };
 
   static propTypes = {
@@ -75,6 +93,9 @@ export default class extends Component {
     const { backgroundColor, changeBackgroundColor } = this.props;
 
     changeBackgroundColor(backgroundColor);
+    if (window.addthis && typeof window.addthis.layers.refresh === 'function') {
+      window.addthis.layers.refresh();
+    }
   };
 
   onCopySuccess = ({ text }) => {
@@ -85,12 +106,21 @@ export default class extends Component {
     this.setState({ copiedURL: '' });
   };
 
+  getGifURL = () => `${process.env.PUBLIC_URL}/img/example.gif`;
+
+  download = () => {
+    // const { match: { params: { subject } } } = this.props;
+    const gifURL = this.getGifURL();
+    // const filename = `${subject}-is-now-illegal.gif`;
+    // TODO: rename the file to the filename above
+    download(gifURL);
+  };
+
   registerClipboardListener = htmlElementRef => {
     if (!htmlElementRef) return;
 
     if (this.clipboardInstance) {
       this.clipboardInstance.destroy();
-      console.log('destroy', this.clipboardInstance);
     }
 
     this.clipboardInstance = new Clipboard(htmlElementRef);
@@ -112,14 +142,26 @@ export default class extends Component {
         <CenterBox>
           <H1><SubjectText>{subject}</SubjectText> is now illegal!</H1>
           <GifContainer>
-            <Gif src={`${process.env.PUBLIC_URL}/img/example.gif`} />
+            <Gif src={this.getGifURL()} />
+            <ShareContainer>
+              <SocialButtons>
+                <div
+                  className="addthis_inline_share_toolbox"
+                  data-title={`${subject} is now illegal!`}
+                  data-url={url}
+                />
+              </SocialButtons>
+              <DownloadButton size={14} onClick={this.download}>
+                Download
+              </DownloadButton>
+            </ShareContainer>
             <Footer>
               <ShareLink href={url}>{url}</ShareLink>
               <CopyButton
                 innerRef={this.registerClipboardListener}
                 data-clipboard-text={url}
+                size={12}
                 outline
-                small
               >
                 {copied ? 'Copied!' : 'Copy'}
               </CopyButton>
@@ -130,3 +172,5 @@ export default class extends Component {
     );
   }
 }
+
+export default withRouter(SharePage);

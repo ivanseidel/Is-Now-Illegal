@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { button, radius as defaultRadius } from '../styles/variables';
 
 const Button = styled.button`
-  padding: ${({ small }) => (small ? '4px 8px' : '10px 20px')};
-  font-size: ${({ small }) => (small ? '12px' : '22px')};
+  padding: ${({ size }) => `${size / 2}px ${size}px`};
+  font-size: ${({ size }) => `${size}px`};
   border: 1px solid transparent;
   border-color: ${({ color, outline }) => (outline ? color : 'transparent')};
   border-radius: ${({ radius }) => radius || 0}px;
@@ -13,7 +13,7 @@ const Button = styled.button`
   color: ${button.foregroundColor};
   text-align: center;
   text-transform: uppercase;
-  ${({ disabled }) => (disabled ? 'opacity: 0.8;' : '')}
+  ${({ disabled }) => (disabled ? 'opacity: 0.8;' : 'cursor: pointer;')}
 
   &:focus {
     outline:none;
@@ -21,15 +21,19 @@ const Button = styled.button`
 `;
 
 Button.defaultProps = {
+  color: 'transparent',
+  disabled: false,
   outline: false,
   radius: defaultRadius,
-  small: false,
+  size: 22,
 };
 
 Button.propTypes = {
+  color: React.PropTypes.string,
+  disabled: React.PropTypes.bool,
   outline: React.PropTypes.bool,
   radius: React.PropTypes.number,
-  small: React.PropTypes.bool,
+  size: React.PropTypes.number,
 };
 
 export default Button;
