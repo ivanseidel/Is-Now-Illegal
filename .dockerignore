@@ -1,3 +1,22 @@
+# Custom Docker folders
 .git
 web
 design
+
+# OS X
+.DS_Store
+
+# Nodejs
+# node_modules/
+
+# Output files
+rotoscope/output.gif
+
+*.swp
+*.swo
+*.pyc
+npm-debug.log
+
+# Tmp folders/files
+tmp/*
+.tmp/

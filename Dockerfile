@@ -37,14 +37,15 @@ RUN cd opencv/build && cmake \
 	..
 RUN cd opencv/build && make
 RUN cd opencv/build && make install
+RUN rm -rf opencv
 
-COPY . /app/
 
 
-# # 
-# # Install dependencies required by node-canvas
-# # 
-# RUN apt-get install -y libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential g++
+# 
+# Install dependencies required by python
+# 
+RUN apt-get install -y python-pip
+RUN pip install pillow
 
 # #
 # # Clear cache
@@ -58,4 +59,5 @@ COPY . /app/
 # #		So, if you want to run another command, just update your CMD to start
 # #		with this script, followed by whatever you want. (Not cute, but works)
 # #
+COPY . /app/
 CMD sh -c 'ln -s /dev/null /dev/raw1394'; npm start
