@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export default styled.div`
   margin: auto;
-  margin-top: 15%;
   width: 50%;
 
   @media (max-width: 1024px) {
@@ -10,6 +9,7 @@ export default styled.div`
   }
 
   @media (max-width: 768px) {
+      flex: 1;
       width: 100%;
   }
 `;

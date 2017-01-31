@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 import Button from '../components/Button';
 import CenterBox from '../components/CenterBox';
@@ -7,7 +8,7 @@ import Form from '../components/Form';
 import H1 from '../components/H1';
 import Page from '../components/Page';
 import Input from '../components/Input';
-import { radius } from '../styles/variables';
+import { colors, radius } from '../styles/variables';
 
 const SubjectText = styled.span`
   color: #333;
@@ -50,8 +51,25 @@ const StyledForm = styled(Form)`
   background-color: #ed2127;
 `;
 
-export default class App extends Component {
+class App extends Component {
+  static defaultProps = {
+    backgroundColor: colors.blue,
+  };
+
+  static propTypes = {
+    backgroundColor: React.PropTypes.string,
+    changeBackgroundColor: React.PropTypes.func.isRequired,
+    push: React.PropTypes.func.isRequired,
+  };
+
   state = { processing: false, subject: '' };
+
+  componentDidMount = () => {
+    const { backgroundColor, changeBackgroundColor } = this.props;
+
+    changeBackgroundColor(backgroundColor);
+  }
+
   subjectInput = null;
 
   illegalize = subject => {
@@ -59,9 +77,13 @@ export default class App extends Component {
 
     this.setState({ processing: true });
 
-    setTimeout(() => {
-      this.setState({ processing: false });
-    }, 3000);
+    setTimeout(
+      () => {
+        this.setState({ processing: false });
+        this.props.push(`/${subject}`);
+      },
+      2000,
+    );
   };
 
   submitIllegalize = e => {
@@ -82,7 +104,7 @@ export default class App extends Component {
     const { processing, subject } = this.state;
 
     return (
-      <Page>
+      <Page background="transparent">
         {
           processing && (
             <CenterBox>
@@ -110,7 +132,13 @@ export default class App extends Component {
                   radius={radius}
                   autoFocus
                 />
-                <FormButton type="submit">Illegalize!</FormButton>
+                <FormButton
+                  type="submit"
+                  onClick={this.submitIllegalize}
+                  disabled={!subject}
+                >
+                  Illegalize!
+                </FormButton>
               </StyledForm>
             </CenterBox>
           )
@@ -119,3 +147,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default withRouter(App);

@@ -10,6 +10,7 @@ export default styled.button`
   background-color: ${button.backgroundColor};
   color: ${button.foregroundColor};
   text-align: center;
+  ${({ disabled }) => (disabled ? 'opacity: 0.8;' : '')}
 
   &:focus {
     outline:none;
