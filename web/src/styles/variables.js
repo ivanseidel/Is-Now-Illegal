@@ -1,4 +1,9 @@
-export const backgroundColor = '#2186c8';
+export const colors = {
+  blue: '#2186c8',
+  red: '#ed2329',
+};
+
+export const backgroundColor = colors.blue;
 export const foregroundColor = '#fff';
 
 export const button = {
