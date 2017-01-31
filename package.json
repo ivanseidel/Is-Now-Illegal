@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/ivanseidel/Is-Now-Illegal/issues"
   },
-  "homepage": "https://github.com/ivanseidel/Is-Now-Illegal#readme"
+  "homepage": "https://github.com/ivanseidel/Is-Now-Illegal#readme",
+  "dependencies": {
+    "async": "^2.1.4",
+    "firebase": "^3.6.7",
+    "firebase-queue": "^1.6.1",
+    "lodash": "^4.17.4"
+  }
 }
