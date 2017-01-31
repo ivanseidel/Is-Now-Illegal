@@ -17,7 +17,7 @@
 //   }, 1000);
 // });
 
-// [START app]
+[START app]
 'use strict';
 
 const express = require('express');

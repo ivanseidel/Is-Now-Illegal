@@ -1,5 +1,5 @@
 # Pull base image.
-FROM ivanseidel/node-python-opencv:3.1.0
+FROM us.gcr.io/is-now-illegal/opencv
 
 MAINTAINER Ivan Seidel <ivanseidel@gmail.com>
 
