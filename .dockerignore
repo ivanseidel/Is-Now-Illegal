@@ -7,7 +7,7 @@ design
 .DS_Store
 
 # Nodejs
-# node_modules/
+node_modules
 
 # Output files
 rotoscope/output.gif
