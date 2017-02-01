@@ -22,6 +22,9 @@ module.exports = (data, progress, resolve, reject) => {
     return reject()
   }
 
+  // Set to UpperCase
+  gifWord = gifWord.toUpperCase()
+
   console.log(`[${gifWord}] New gif task`)
 
   // Create filepath for gif

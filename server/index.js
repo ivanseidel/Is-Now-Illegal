@@ -1,13 +1,14 @@
-var fs = require('fs')
-var path = require('path')
-var async = require('async')
+const fs = require('fs')
+const path = require('path')
+const async = require('async')
+const express = require('express');
 
-var Queue = require('firebase-queue')
-var admin = require('firebase-admin')
-var storage = require('@google-cloud/storage');
+const Queue = require('firebase-queue')
+const admin = require('firebase-admin')
+const storage = require('@google-cloud/storage');
 
-var PathLoader = require('./PathLoader')
-var GifGenerator = require('./GifGenerator')
+const PathLoader = require('./PathLoader')
+const GifGenerator = require('./GifGenerator')
 
 // Expose global app object
 var app = {}
@@ -44,9 +45,29 @@ app.TASKS = PathLoader.load(path.join(__dirname, 'tasks'))
 // Load Firebase Queue
 app.queueRef = app.admin.database().ref('queue')
 
-// Start Firebase Queue processing
-var queue = new Queue(app.queueRef, handleQueueTask)
+// 
+// Start HTTP server
+// 
+app.express = express();
 
+app.express.get('/', (req, res) => {
+  res.status(200).send('home');
+});
+
+app.express.get('/_ah/health', (req, res) => {
+  res.status(200).send('OK '+Date.now());
+});
+
+const PORT = process.env.PORT || 8080;
+app.express.listen(PORT, () => {
+  console.log(`App listening on port ${PORT}`);
+});
+
+
+// 
+// Start Firebase Queue processing
+// 
+var queue = new Queue(app.queueRef, handleQueueTask)
 function handleQueueTask(data, progress, resolve, reject) {
   // Check if task type exists
   if ( !(data.task in app.TASKS)) {
