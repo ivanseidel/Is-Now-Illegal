@@ -65,7 +65,8 @@ module.exports = (data, progress, resolve, reject) => {
       console.log(`[${gifWord}] Upload gif`)
 
       gifsStorage.upload(filePath, {
-        destination: 'gifs/' + fileName
+        destination: 'gifs/' + fileName,
+        gzip: true,
       }, next);  
     },
 
