@@ -1,36 +1,67 @@
-// var Queue = require('firebase-queue'),
-//     Firebase = require('firebase');
+var fs = require('fs')
+var path = require('path')
+var async = require('async')
 
-// var queueRef = new Firebase('https://is-now-illegal.firebaseio.com/queue');
-// var queue = new Queue(queueRef, function(data, progress, resolve, reject) {
-//   // Read and process task data
-//   console.log(data);
+var Queue = require('firebase-queue')
+var admin = require('firebase-admin')
+var storage = require('@google-cloud/storage');
 
-//   // Update the progress state of the task
-//   setTimeout(function() {
-//     progress(50);
-//   }, 500);
+var PathLoader = require('./PathLoader')
+var GifGenerator = require('./GifGenerator')
 
-//   // Finish the job asynchronously
-//   setTimeout(function() {
-//     resolve();
-//   }, 1000);
-// });
+// Expose global app object
+var app = {}
+global.app = app
 
-[START app]
-'use strict';
+// Load credentials
+var credentialsPath = path.join(__dirname, '../credentials.json')
+var credentials = require(credentialsPath)
 
-const express = require('express');
-const app = express();
+// Initialize tmp path
+app.TMP_PATH = path.join(__dirname, '../tmp')
+if (!fs.existsSync(app.TMP_PATH))
+    fs.mkdirSync(app.TMP_PATH)
 
-app.get('/', (req, res) => {
-  res.status(200).send('Hello, world!');
+// Initialize Firebase connection
+app.admin = admin
+app.admin.initializeApp({
+  credential: admin.credential.cert(credentials),
+  databaseURL: 'https://is-now-illegal.firebaseio.com',
+  databaseAuthVariableOverride: {
+    uid: 'worker'
+  }
+})
+
+// Initialize GCloud connection
+app.gcs = storage({
+  projectId: credentials.project_id,
+  keyFilename: credentialsPath
 });
 
-// Start the server
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
-  console.log('Press Ctrl+C to quit.');
-});
-// [END app]
+// Load tasks
+app.TASKS = PathLoader.load(path.join(__dirname, 'tasks'))
+
+// Load Firebase Queue
+app.queueRef = app.admin.database().ref('queue')
+
+// Start Firebase Queue processing
+var queue = new Queue(app.queueRef, handleQueueTask)
+
+function handleQueueTask(data, progress, resolve, reject) {
+  // Check if task type exists
+  if ( !(data.task in app.TASKS)) {
+    console.log(`Task [${data.task}] does not exist`)
+    return reject()
+  }
+
+  // Load task to execute
+  let task = app.TASKS[data.task]
+
+  // Delegate call
+  task(...arguments)
+};
+
+// Test
+handleQueueTask({task: 'gif', word: 'test'}, console.log, console.log, console.log)
+
+

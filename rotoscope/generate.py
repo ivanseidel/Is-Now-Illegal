@@ -4,8 +4,11 @@ import cv2
 import json
 import time
 import numpy as np
-
 from PIL import Image
+
+# Change working directory to here
+dir_path = os.path.dirname(os.path.realpath(__file__))
+os.chdir(dir_path)
 
 import rotoscope
 

@@ -18,10 +18,13 @@
   },
   "homepage": "https://github.com/ivanseidel/Is-Now-Illegal#readme",
   "dependencies": {
+    "@google-cloud/storage": "^0.6.1",
     "async": "^2.1.4",
     "express": "^4.14.1",
     "firebase": "^3.6.7",
+    "firebase-admin": "^4.0.6",
     "firebase-queue": "^1.6.1",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "python-shell": "^0.4.0"
   }
 }
