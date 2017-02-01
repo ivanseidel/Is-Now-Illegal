@@ -10,11 +10,14 @@ import Input from '../components/Input';
 import Page from '../components/Page';
 import SubjectText from '../components/SubjectText';
 import { colors, radius } from '../styles/variables';
+import { SUBJECT_PATTERN_ALLOW } from '../utils/constants';
+import { removeIllegalCharacters } from '../utils/helpers';
 
 const FormInput = styled(Input)`
   flex: 1;
   background-color: #fff;
   color: #2b325f;
+  text-transform: uppercase;
   
   @media (max-width: 600px) {
     width: 100%;
@@ -46,9 +49,7 @@ const StyledForm = styled(Form)`
 `;
 
 class App extends Component {
-  static defaultProps = {
-    backgroundColor: colors.blue,
-  };
+  static defaultProps = { backgroundColor: colors.blue };
 
   static propTypes = {
     backgroundColor: React.PropTypes.string,
@@ -62,7 +63,7 @@ class App extends Component {
     const { backgroundColor, changeBackgroundColor } = this.props;
 
     changeBackgroundColor(backgroundColor);
-  }
+  };
 
   subjectInput = null;
 
@@ -74,7 +75,7 @@ class App extends Component {
     setTimeout(
       () => {
         this.setState({ processing: false });
-        this.props.push(`/${subject}`);
+        this.props.push(`/${subject.toLowerCase()}`);
       },
       2000,
     );
@@ -92,7 +93,8 @@ class App extends Component {
     return false;
   };
 
-  handleSubjectChange = e => this.setState({ subject: e.target.value });
+  handleSubjectChange = e =>
+    this.setState({ subject: removeIllegalCharacters(e.target.value || '') });
 
   render() {
     const { processing, subject } = this.state;
@@ -121,9 +123,10 @@ class App extends Component {
                   type="text"
                   name="subject"
                   placeholder="STUFF"
-                  defaultValue={subject}
+                  value={subject}
                   onChange={this.handleSubjectChange}
                   radius={radius}
+                  pattern={SUBJECT_PATTERN_ALLOW}
                   autoFocus
                 />
                 <FormButton
