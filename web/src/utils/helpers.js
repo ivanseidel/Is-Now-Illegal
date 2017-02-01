@@ -1,4 +1,12 @@
 /* eslint-disable import/prefer-default-export */
-export function capitalize(str) {
-  return `${str.charAt(0).toUpperCase()}${str.slice(1).toLowerCase()}`;
+
+import { SUBJECT_PATTERN_REJECT } from './constants';
+
+export function removeIllegalCharacters(str) {
+  // remove invalid characters and trim
+  return str.replace(SUBJECT_PATTERN_REJECT, '').replace(/\s+/g, ' ').substr(0, 10);
+}
+
+export function formatSubject(str) {
+  return removeIllegalCharacters(str).trim().toUpperCase();
 }

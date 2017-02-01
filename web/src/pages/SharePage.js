@@ -10,6 +10,7 @@ import H1 from '../components/H1';
 import Page from '../components/Page';
 import SubjectText from '../components/SubjectText';
 import { colors, radius } from '../styles/variables';
+import { formatSubject } from '../utils/helpers';
 
 const padding = 20;
 
@@ -87,7 +88,10 @@ class SharePage extends Component {
     }).isRequired,
   };
 
-  state = { copiedURL: '' };
+  state = {
+    copiedURL: '',
+    subject: formatSubject(this.props.match.params.subject),
+  };
 
   componentDidMount = () => {
     const { backgroundColor, changeBackgroundColor } = this.props;
@@ -97,6 +101,10 @@ class SharePage extends Component {
       window.addthis.layers.refresh();
     }
   };
+
+  componentWillReceiveProps = ({ match: { params: { subject } } }) => {
+    this.setState({ subject: formatSubject(subject) });
+  }
 
   onCopySuccess = ({ text }) => {
     this.setState({ copiedURL: text });
@@ -109,9 +117,9 @@ class SharePage extends Component {
   getGifURL = () => `${process.env.PUBLIC_URL}/img/example.gif`;
 
   download = () => {
-    // const { match: { params: { subject } } } = this.props;
     const gifURL = this.getGifURL();
     // const filename = `${subject}-is-now-illegal.gif`;
+
     // TODO: rename the file to the filename above
     download(gifURL);
   };
@@ -131,8 +139,7 @@ class SharePage extends Component {
   clipboardInstance = null;
 
   render() {
-    const { copiedURL } = this.state;
-    const { match: { params: { subject } } } = this.props;
+    const { copiedURL, subject } = this.state;
 
     const url = window.location.href;
     const copied = copiedURL === url;
