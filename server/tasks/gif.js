@@ -76,7 +76,6 @@ module.exports = (data, progress, resolve, reject) => {
       gifRef.set({
         url: 'https://storage.googleapis.com/is-now-illegal.appspot.com/gifs/'+fileName,
         views: 1,
-        processingTime
         created: new Date(),
         processTime: Date.now() - startTime
       }, next)
