@@ -62,6 +62,4 @@ function handleQueueTask(data, progress, resolve, reject) {
 };
 
 // Test
-handleQueueTask({task: 'gif', word: 'test'}, console.log, console.log, console.log)
-
-
+// handleQueueTask({task: 'gif', word: 'test'}, console.log, console.log, console.log)
