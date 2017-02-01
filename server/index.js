@@ -61,5 +61,8 @@ function handleQueueTask(data, progress, resolve, reject) {
   task(...arguments)
 };
 
+// Log server start
+console.log('Queue worker is alive')
+
 // Test
 // handleQueueTask({task: 'gif', word: 'test'}, console.log, console.log, console.log)
