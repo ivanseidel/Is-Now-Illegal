@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import qs from 'qs';
 import { withRouter } from 'react-router-dom';
 
 import Button from '../components/Button';
@@ -8,10 +9,9 @@ import Form from '../components/Form';
 import H1 from '../components/H1';
 import Input from '../components/Input';
 import Page from '../components/Page';
-import SubjectText from '../components/SubjectText';
 import { colors, radius } from '../styles/variables';
 import { SUBJECT_PATTERN_ALLOW } from '../utils/constants';
-import { removeIllegalCharacters } from '../utils/helpers';
+import { formatSubject, removeIllegalCharacters } from '../utils/helpers';
 
 const FormInput = styled(Input)`
   flex: 1;
@@ -33,14 +33,6 @@ const FormButton = styled(Button)`
   }
 `;
 
-const FormBigText = styled.p`
-  width: 100%;
-  line-height: 50px;
-  font-size: 24px;
-  text-align: center;
-  vertical-align: middle;
-`;
-
 const StyledForm = styled(Form)`
   min-height: 70px;
   padding: 10px;
@@ -49,20 +41,25 @@ const StyledForm = styled(Form)`
 `;
 
 class App extends Component {
-  static defaultProps = { backgroundColor: colors.blue };
+  static defaultProps = { backgroundColor: colors.blue, subject: '' };
 
   static propTypes = {
     backgroundColor: React.PropTypes.string,
     changeBackgroundColor: React.PropTypes.func.isRequired,
     push: React.PropTypes.func.isRequired,
+    subject: React.PropTypes.string,
   };
 
-  state = { processing: false, subject: '' };
+  state = { subject: this.props.subject || qs.parse(window.location.search.slice(1)).stuff || '' };
 
   componentDidMount = () => {
     const { backgroundColor, changeBackgroundColor } = this.props;
 
     changeBackgroundColor(backgroundColor);
+
+    // if (window.location.search) {
+    //   window.location.search = '';
+    // }
   };
 
   subjectInput = null;
@@ -70,15 +67,8 @@ class App extends Component {
   illegalize = subject => {
     if (!subject) return;
 
-    this.setState({ processing: true });
-
-    setTimeout(
-      () => {
-        this.setState({ processing: false });
-        this.props.push(`/${subject.toLowerCase()}`);
-      },
-      2000,
-    );
+    const formattedSubject = formatSubject(subject);
+    this.props.push(`/${formattedSubject.toLowerCase()}`, { processing: true });
   };
 
   submitIllegalize = e => {
@@ -97,49 +87,35 @@ class App extends Component {
     this.setState({ subject: removeIllegalCharacters(e.target.value || '') });
 
   render() {
-    const { processing, subject } = this.state;
+    const { subject } = this.state;
 
     return (
       <Page background="transparent">
-        {
-          processing && (
-            <CenterBox>
-              <H1>Making <SubjectText>{subject}</SubjectText> illegal...</H1>
-              <StyledForm radius={radius}>
-                <FormBigText>Please wait...</FormBigText>
-              </StyledForm>
-            </CenterBox>
-          )
-        }
-        {
-          !processing && (
-            <CenterBox>
-              <H1>What's going to be illegal?</H1>
-              <StyledForm onSubmit={this.submitIllegalize} radius={radius}>
-                <FormInput
-                  innerRef={ref => {
-                    this.subjectInput = ref;
-                  }}
-                  type="text"
-                  name="subject"
-                  placeholder="STUFF"
-                  value={subject}
-                  onChange={this.handleSubjectChange}
-                  radius={radius}
-                  pattern={SUBJECT_PATTERN_ALLOW}
-                  autoFocus
-                />
-                <FormButton
-                  type="submit"
-                  onClick={this.submitIllegalize}
-                  disabled={!subject}
-                >
-                  Illegalize!
-                </FormButton>
-              </StyledForm>
-            </CenterBox>
-          )
-        }
+        <CenterBox>
+          <H1>What's going to be illegal?</H1>
+          <StyledForm onSubmit={this.submitIllegalize} radius={radius}>
+            <FormInput
+              innerRef={ref => {
+                this.subjectInput = ref;
+              }}
+              type="text"
+              name="subject"
+              placeholder="Stuff"
+              value={subject}
+              onChange={this.handleSubjectChange}
+              radius={radius}
+              pattern={SUBJECT_PATTERN_ALLOW}
+              autoFocus
+            />
+            <FormButton
+              type="submit"
+              onClick={this.submitIllegalize}
+              disabled={!subject}
+            >
+              Illegalize!
+            </FormButton>
+          </StyledForm>
+        </CenterBox>
       </Page>
     );
   }

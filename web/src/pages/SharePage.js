@@ -4,8 +4,12 @@ import styled from 'styled-components';
 import download from 'downloadjs';
 import { withRouter } from 'react-router-dom';
 
+import firebase from '../libs/firebase';
 import Button from '../components/Button';
 import CenterBox from '../components/CenterBox';
+import LoadingPage, {
+  defaultBackgroundColor as loadingBackgroundColor,
+} from '../pages/LoadingPage';
 import H1 from '../components/H1';
 import Page from '../components/Page';
 import SubjectText from '../components/SubjectText';
@@ -76,7 +80,7 @@ const CopyButton = styled(Button)`
 `;
 
 class SharePage extends Component {
-  static defaultProps = { backgroundColor: colors.red };
+  static defaultProps = { backgroundColor: colors.red, processing: false };
 
   static propTypes = {
     backgroundColor: React.PropTypes.string,
@@ -86,25 +90,40 @@ class SharePage extends Component {
         subject: React.PropTypes.string.isRequired,
       }).isRequired,
     }).isRequired,
+    processing: React.PropTypes.bool,
+    push: React.PropTypes.func.isRequired,
   };
 
   state = {
     copiedURL: '',
+    loading: false,
+    gifURL: '',
+    gifFirebaseRef: null,
+    processing: !!this.props.processing,
     subject: formatSubject(this.props.match.params.subject),
   };
 
   componentDidMount = () => {
-    const { backgroundColor, changeBackgroundColor } = this.props;
-
-    changeBackgroundColor(backgroundColor);
-    if (window.addthis && typeof window.addthis.layers.refresh === 'function') {
-      window.addthis.layers.refresh();
-    }
+    this.loadGif();
+    this.updateBackgroundColor();
+    this.updateAddThis();
   };
 
   componentWillReceiveProps = ({ match: { params: { subject } } }) => {
-    this.setState({ subject: formatSubject(subject) });
-  }
+    const formattedSubject = formatSubject(subject);
+
+    if (formattedSubject && formattedSubject !== this.state.subject) {
+      this.setState({ subject: formattedSubject }, () => {
+        this.loadGif();
+      });
+    }
+  };
+
+  componentWillUnmount = () => {
+    const { gifFirebaseRef } = this.state;
+
+    if (gifFirebaseRef) gifFirebaseRef.off();
+  };
 
   onCopySuccess = ({ text }) => {
     this.setState({ copiedURL: text });
@@ -114,14 +133,59 @@ class SharePage extends Component {
     this.setState({ copiedURL: '' });
   };
 
-  getGifURL = () => `${process.env.PUBLIC_URL}/img/example.gif`;
+  loadGif = () => {
+    const {
+      gifFirebaseRef: oldGifFirebaseRef,
+      processing,
+      subject,
+    } = this.state;
+    const { push } = this.props;
+
+    this.setState({ loading: true });
+
+    // unlisten to previous gif database reference
+    if (oldGifFirebaseRef) oldGifFirebaseRef.off();
+
+    const gifFirebaseRef = firebase.database().ref(`gifs/${subject}/url`);
+    gifFirebaseRef.on('value', snapshot => {
+      const gifURL = snapshot.val() || '';
+      // got the url, stop listening for changes
+      if (gifURL) {
+        gifFirebaseRef.off();
+        this.setState({
+          gifFirebaseRef,
+          gifURL,
+          loading: false,
+          processing: false,
+        });
+        this.updateBackgroundColor();
+        this.updateAddThis();
+      } else if (!processing) {
+        // user opened by url
+        // we saw if exists. it didnt. so lets redirect it to the main page
+        push(`/?stuff=${subject}`, { subject });
+      }
+    });
+  };
 
   download = () => {
-    const gifURL = this.getGifURL();
+    const { gifURL } = this.state;
     // const filename = `${subject}-is-now-illegal.gif`;
-
     // TODO: rename the file to the filename above
     download(gifURL);
+  };
+
+  updateAddThis = () => {
+    if (window.addthis && typeof window.addthis.layers.refresh === 'function') {
+      window.addthis.layers.refresh();
+    }
+  };
+
+  updateBackgroundColor = () => {
+    const { loading } = this.state;
+    const { backgroundColor, changeBackgroundColor } = this.props;
+
+    changeBackgroundColor(loading ? loadingBackgroundColor : backgroundColor);
   };
 
   registerClipboardListener = htmlElementRef => {
@@ -139,23 +203,34 @@ class SharePage extends Component {
   clipboardInstance = null;
 
   render() {
-    const { copiedURL, subject } = this.state;
+    const { copiedURL, gifURL, loading, processing, subject } = this.state;
+    const { changeBackgroundColor } = this.props;
 
-    const url = window.location.href;
-    const copied = copiedURL === url;
+    if (loading || processing) {
+      return (
+        <LoadingPage
+          changeBackgroundColor={changeBackgroundColor}
+          processing={processing}
+          subject={subject}
+        />
+      );
+    }
+
+    const shareURL = window.location.href;
+    const copied = copiedURL === shareURL;
 
     return (
       <Page background="transparent">
         <CenterBox>
           <H1><SubjectText>{subject}</SubjectText> is now illegal!</H1>
           <GifContainer>
-            <Gif src={this.getGifURL()} />
+            <Gif src={gifURL} loading={loading} />
             <ShareContainer>
               <SocialButtons>
                 <div
                   className="addthis_inline_share_toolbox"
-                  data-title={`${subject} is now illegal!`}
-                  data-url={url}
+                  data-title={`${subject} is now illegal! #IsNowIllegal`}
+                  data-url={shareURL}
                 />
               </SocialButtons>
               <DownloadButton size={14} onClick={this.download}>
@@ -163,10 +238,10 @@ class SharePage extends Component {
               </DownloadButton>
             </ShareContainer>
             <Footer>
-              <ShareLink href={url}>{url}</ShareLink>
+              <ShareLink href={shareURL}>{shareURL}</ShareLink>
               <CopyButton
                 innerRef={this.registerClipboardListener}
-                data-clipboard-text={url}
+                data-clipboard-text={shareURL}
                 size={12}
                 outline
               >
