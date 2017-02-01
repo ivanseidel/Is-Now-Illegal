@@ -63,8 +63,9 @@ for frame in frames:
 	frameImages.append(finalFrame)
 	
 # Saving...
-frameImages[0].save(gifFile, save_all=True, append_images=frameImages)
+frameImages[0].save(gifFile, save_all=True, append_images=frameImages, loop=0)
 
+# Print process duration
 timeEnd = int(time.time() * 1000)
 duration = (timeEnd - timeStart)
 print('Tooks %d' % duration)
