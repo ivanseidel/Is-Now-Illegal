@@ -39,11 +39,6 @@ app.gcs = storage({
   keyFilename: credentialsPath
 });
 
-// Load tasks
-app.TASKS = PathLoader.load(path.join(__dirname, 'tasks'))
-
-// Load Firebase Queue
-app.queueRef = app.admin.database().ref('queue')
 
 // 
 // Start HTTP server
@@ -67,7 +62,17 @@ app.express.listen(PORT, () => {
 // 
 // Start Firebase Queue processing
 // 
-var queue = new Queue(app.queueRef, handleQueueTask)
+
+// Load tasks
+app.TASKS = PathLoader.load(path.join(__dirname, 'tasks'))
+
+// Load Firebase Queue
+app.queueRef = app.admin.database().ref('queue')
+
+var queueOptions = {
+  numWorkers: 3,
+}
+var queue = new Queue(app.queueRef, queueOptions, handleQueueTask)
 function handleQueueTask(data, progress, resolve, reject) {
   // Check if task type exists
   if ( !(data.task in app.TASKS)) {
