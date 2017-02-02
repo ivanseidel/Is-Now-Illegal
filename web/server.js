@@ -35,7 +35,7 @@ app.express.get('/', apicache('1 hour'), (req, res) => {
 
 app.express.get('/share/:gif', apicache('1 hour'), (req, res) => {
 	gif = encodeURIComponent(req.params.gif || '');
-	res.redirect('/'+req.params.gif)
+	res.redirect(301, '/'+req.params.gif)
 })
 
 app.express.get('/:gif', apicache('10 minutes'), (req, res) => {
