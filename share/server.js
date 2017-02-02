@@ -2,9 +2,10 @@ const fs = require('fs')
 const path = require('path')
 const async = require('async')
 const express = require('express');
+const compression = require('compression');
 const apicache = require('apicache').middleware;
 const handlebars = require('handlebars');
-const compression = require('compression');
+const request = require('request');
 
 // Expose global app object
 var app = {}
@@ -29,24 +30,29 @@ var home = template({
 app.express = express();
 app.express.use(compression());
 
+// Set engine
+app.express.set('view engine', 'handlebars');
+
 app.express.get('/', (req, res) => {
 	res.redirect('http://isnowillegal.com')
 })
 
-app.express.get('/:gif.gif', (req, res) => {
+app.express.get('/:gif.gif', apicache('10 minutes'), (req, res) => {
 	const gif = (req.params.gif || '').toUpperCase()
-	res.redirect(`https://storage.googleapis.com/is-now-illegal.appspot.com/gifs/${gif}.gif`);
+	const uri = `https://storage.googleapis.com/is-now-illegal.appspot.com/gifs/${gif}.gif`;
+
+	request.get(uri).pipe(res);
 });
 
-app.express.get('/:gif', (req, res) => {//, apicache('10 minutes')
+app.express.get('/:gif', apicache('10 minutes'), (req, res) => {
 	const gif = (req.params.gif || '').toUpperCase()
-	const href = `http://share.isnowillegal.com/${gif}.gif`
+	const uri = `http://share.isnowillegal.com/${gif}.gif`
 
 	res.status(200).send(template({
-		url: href,
+		url: uri,
 		site: 'IsNowIllegal',
 		title: gif + ' Is Now Illegal',
-		gif_url: href,
+		gif_url: uri,
 		description: 'Declare things illegal and trump will sign it',
 		content_type: 'video.other',
 		share_url: 'http://isnowillegal.com/?'+gif
