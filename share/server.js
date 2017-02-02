@@ -33,11 +33,15 @@ app.express.get('/', (req, res) => {
 	res.redirect('http://isnowillegal.com')
 })
 
-app.express.get('/:gif', apicache('10 minutes'), (req, res) => {
-	let gif = req.params.gif || ''
-	gif = gif.toUpperCase()
+app.express.get('/:gif.gif', (req, res) => {
+	const gif = (req.params.gif || '').toUpperCase()
+	res.redirect(`https://storage.googleapis.com/is-now-illegal.appspot.com/gifs/${gif}.gif`);
+});
 
-	let href = `https://storage.googleapis.com/is-now-illegal.appspot.com/gifs/${gif}.gif`
+app.express.get('/:gif', (req, res) => {//, apicache('10 minutes')
+	const gif = (req.params.gif || '').toUpperCase()
+	const href = `http://share.isnowillegal.com/${gif}.gif`
+
 	res.status(200).send(template({
 		url: href,
 		site: 'IsNowIllegal',
