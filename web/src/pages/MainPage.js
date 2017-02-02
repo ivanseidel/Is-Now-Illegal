@@ -17,7 +17,7 @@ import { formatSubject, removeIllegalCharacters } from '../utils/helpers';
 const FormInput = styled(Input)`
   flex: 1;
   background-color: #fff;
-  color: #2b325f;
+  color: #303030;
   text-transform: uppercase;
   
   @media (max-width: 600px) {

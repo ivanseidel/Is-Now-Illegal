@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export default styled.h1`
   margin-bottom: 24px;
+  font-family: monospace;
   font-size: 36px;
   text-align: center;
   color: #fff;

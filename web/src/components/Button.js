@@ -13,7 +13,7 @@ const Button = styled.button`
   color: ${button.foregroundColor};
   text-align: center;
   text-transform: uppercase;
-  ${({ disabled }) => (disabled ? 'opacity: 0.8;' : 'cursor: pointer;')}
+  ${({ disabled }) => (disabled ? 'opacity: 0.4;' : 'cursor: pointer;')}
 
   &:focus {
     outline:none;
