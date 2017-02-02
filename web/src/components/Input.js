@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export default styled.input`
   padding: 10px 20px;
+  font-family: 'Alfa Slab One', 'sans-serif', Verdana;
   font-size: 22px;
   border: 0;
   border-radius: ${({ radius }) => radius || 0}px;

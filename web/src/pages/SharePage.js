@@ -64,6 +64,7 @@ const ShareLink = styled.a`
   color: #fff;
   text-align: right;
   text-decoration: none;
+  font-family: 'Alfa Slab One', 'sans-serif', Verdana;
   font-size: 12px;
   font-weight: 300;
   opacity: 0.95;
@@ -73,6 +74,7 @@ const CopyButton = styled(Button)`
   margin-left: ${padding / 2}px;
   background-color: transparent;
   border-color: #fff;
+  font-family: 'Alfa Slab One', 'sans-serif', Verdana;
   font-size: 12px;
   font-weight: 300;
   color: #fff;

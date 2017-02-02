@@ -5,6 +5,7 @@ import { button, radius as defaultRadius } from '../styles/variables';
 
 const Button = styled.button`
   padding: ${({ size }) => `${size / 2}px ${size}px`};
+  font-family: 'Alfa Slab One', 'sans-serif', Verdana;
   font-size: ${({ size }) => `${size}px`};
   border: 1px solid transparent;
   border-color: ${({ color, outline }) => (outline ? color : 'transparent')};
