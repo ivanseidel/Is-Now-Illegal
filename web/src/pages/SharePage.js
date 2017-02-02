@@ -146,9 +146,9 @@ class SharePage extends Component {
     this.setState({ copiedURL: '' });
   };
 
-  getShareURL = () => `http://share.isnowillegal.com/${this.state.subject}`;
+  getShareURL = () => encodeURI(`http://share.isnowillegal.com/${this.state.subject}`);
   getDownloadURL = () =>
-    `http://share.isnowillegal.com/${this.state.subject}.gif`;
+    encodeURI(`http://share.isnowillegal.com/${this.state.subject}.gif`);
 
   loadGif = () => {
     const {
