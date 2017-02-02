@@ -1,16 +1,31 @@
-# Is Now Illegal
+# Is Now Illegal!
 
-A NERD protest against Trump's Immigration ban!
+A NERD protest against Trump's Immigration ban 🚫
 
-### Before proceeding watch this video
-[![Trump is Illuminatty](https://img.youtube.com/vi/TyH0DyWdGbg/0.jpg)](https://www.youtube.com/watch?v=TyH0DyWdGbg)
+Go to [IsNowIllegal.com](http://isnowillegal.com) and type what you want!
 
-Now that you are properly introduced to the matter of this repository we can continue.
 
 ## What's this?
 
-This is a little web application(WebApp) we made for people to have fun and pretend they are Donald J. Trump for some Seconds.
+A webapp that gives you the Donald J. Trump power. Pretend you are Trump for a few seconds, make something illegal, share with friends and have fun!
 
-## How to use it?
 
-Go to [Is Now Illegal](http://isnowillegal.com) and type what you want.
+## Who made this?
+
+<a href="https://github.com/ivanseidel" target="_blank">
+![](https://github.com/ivanseidel.png?size=100)
+<br/>
+[@ivanseidel](https://github.com/ivanseidel)
+</a>
+
+<a href="https://twitter.com/brunolemos" target="_blank">
+![](https://github.com/brunolemos.png?size=100)
+<br/>
+[@brunolemos](https://twitter.com/brunolemos)
+</a>
+
+<a href="https://github.com/joaopedrovbs" target="_blank">
+![](https://github.com/joaopedrovbs.png?size=100)
+<br/>
+[@joaopedrovbs](https://github.com/joaopedrovbs)
+</a>
