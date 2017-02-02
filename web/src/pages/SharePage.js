@@ -229,7 +229,7 @@ class SharePage extends Component {
       );
     }
 
-    const shareURL = window.location.href;
+    const shareURL = 'http://share.isnowillegal.com/'+ subject;
     const copied = copiedURL === shareURL;
 
     return (
