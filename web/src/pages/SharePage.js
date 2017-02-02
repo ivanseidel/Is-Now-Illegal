@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Clipboard from 'clipboard';
 import styled from 'styled-components';
-import download from 'downloadjs';
+// import download from 'downloadjs';
 import { withRouter } from 'react-router-dom';
 
 import firebase from '../libs/firebase';
@@ -32,10 +32,18 @@ const Gif = styled.img`
   min-height: 300px;
 `;
 
-const ShareContainer = styled.div`
+const Row = styled.div`
   display: flex;
+  flex-direction: ${({ horizontal }) => (horizontal ? 'row' : 'column')};
   align-items: center;
   margin-top: ${padding}px;
+  color: ${({ muted }) => (muted ? '#999' : '333')};
+  font-size: 14px;
+  text-align: left;
+
+  & a {
+    color: #000;
+  }
 `;
 
 const SocialButtons = styled.div`
@@ -139,7 +147,8 @@ class SharePage extends Component {
   };
 
   getShareURL = () => `http://share.isnowillegal.com/${this.state.subject}`;
-  getDownloadURL = () => `http://share.isnowillegal.com/${this.state.subject}.gif`;
+  getDownloadURL = () =>
+    `http://share.isnowillegal.com/${this.state.subject}.gif`;
 
   loadGif = () => {
     const {
@@ -239,7 +248,7 @@ class SharePage extends Component {
           <H1><SubjectText>{subject}</SubjectText> is now illegal!</H1>
           <GifContainer>
             <Gif src={gifURL} loading={loading} />
-            <ShareContainer>
+            <Row horizontal>
               <SocialButtons>
                 <div
                   className="addthis_inline_share_toolbox"
@@ -250,7 +259,13 @@ class SharePage extends Component {
               <DownloadButton size={14} onClick={this.download}>
                 Download
               </DownloadButton>
-            </ShareContainer>
+            </Row>
+            <Row muted>
+              <p>
+                Twitter sharing tip: Download the image, then drag&amp;drop the file to{' '}
+                <a href="http://twitter.com" target="_blank">twitter.com</a>.
+              </p>
+            </Row>
             <Footer>
               <ShareLink href={shareURL}>{shareURL}</ShareLink>
               <CopyButton
