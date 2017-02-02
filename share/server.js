@@ -43,7 +43,6 @@ app.express.get('/:gif.gif', apicache('10 minutes'), (req, res) => {
   const filename = word.toUpperCase();
   const uri = `https://storage.googleapis.com/is-now-illegal.appspot.com/gifs/${filename}.gif`;
 
-  res.setHeader('Content-Encoding', 'sdch');
   res.setHeader('Content-Type', 'image/gif');
   res.setHeader('Access-Control-Allow-Origin', '*');
   request.get(uri).pipe(res);
