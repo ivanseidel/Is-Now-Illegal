@@ -2,7 +2,7 @@
 
 A NERD protest against Trump's Immigration ban 🚫
 
-Go to [IsNowIllegal.com](http://isnowillegal.com) and type what you want!
+Go to <a href="http://isnowillegal.com" target="_blank">IsNowIllegal.com</a> and type what you want!
 
 
 ## What's this?
