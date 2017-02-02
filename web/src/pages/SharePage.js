@@ -42,11 +42,11 @@ const SocialButtons = styled.div`
   flex: 1;
 `;
 
-const DownloadButton = styled(Button)`
-  margin-left: ${padding / 2}px;
-  background-color: #3d3e3d;
-  color: #fff;
-`;
+// const DownloadButton = styled(Button)`
+//   margin-left: ${padding / 2}px;
+//   background-color: #3d3e3d;
+//   color: #fff;
+// `;
 
 const Footer = styled.div`
   display: flex;
@@ -229,7 +229,7 @@ class SharePage extends Component {
       );
     }
 
-    const shareURL = 'http://share.isnowillegal.com/'+ subject;
+    const shareURL = `http://share.isnowillegal.com/${subject}`;
     const copied = copiedURL === shareURL;
 
     return (
@@ -246,9 +246,6 @@ class SharePage extends Component {
                   data-url={shareURL}
                 />
               </SocialButtons>
-              <DownloadButton size={14} onClick={this.download}>
-                Download
-              </DownloadButton>
             </ShareContainer>
             <Footer>
               <ShareLink href={shareURL}>{shareURL}</ShareLink>
@@ -267,5 +264,9 @@ class SharePage extends Component {
     );
   }
 }
+
+// <DownloadButton size={14} onClick={this.download}>
+//   Download
+// </DownloadButton>
 
 export default withRouter(SharePage);
