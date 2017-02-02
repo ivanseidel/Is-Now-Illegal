@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './reset.css';
 import './index.css';
 
+import Link from './components/Link';
 import Footer from './components/Footer';
 import MainPage from './pages/MainPage';
 import PageContainer from './components/PageContainer';
@@ -51,16 +52,43 @@ export default class extends Component {
               changeBackgroundColor={this.changeBackgroundColor}
             />
           </Switch>
-
           <Footer>
             <p>
-              <a className="github-button" href="https://github.com/ivanseidel/Is-Now-Illegal" data-style="mega" data-count-href="/ivanseidel/Is-Now-Illegal/stargazers" data-count-api="/repos/ivanseidel/Is-Now-Illegal#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star ivanseidel/Is-Now-Illegal on GitHub">Star on GitHub</a>
+              <Link
+                className="github-button"
+                href="https://github.com/ivanseidel/Is-Now-Illegal"
+                data-style="mega"
+                data-count-href="/ivanseidel/Is-Now-Illegal/stargazers"
+                data-count-api="/repos/ivanseidel/Is-Now-Illegal#stargazers_count"
+                data-count-aria-label="# stargazers on GitHub"
+                aria-label="Star ivanseidel/Is-Now-Illegal on GitHub"
+                onClick={() => alert('a')}
+              >
+                Star on GitHub
+              </Link>
             </p>
             <p>A nerdy protest made by </p>
             <p>
-              <a href="https://github.com/ivanseidel" target="_blank">Ivan Seidel</a>,&nbsp;
-              <a href="https://twitter.com/brunolemos" target="_blank">Bruno Lemos</a> &amp;&nbsp;
-              <a href="https://github.com/joaopedrovbs" target="_blank">João Pedro</a>
+              <Link
+                href="https://github.com/ivanseidel"
+                target="_blank"
+              >
+                Ivan Seidel
+              </Link>
+              {', '}
+              <Link
+                href="https://twitter.com/brunolemos"
+                target="_blank"
+              >
+                Bruno Lemos
+              </Link>
+              {' & '}
+              <Link
+                href="https://github.com/joaopedrovbs"
+                target="_blank"
+              >
+                João Pedro
+              </Link>
             </p>
           </Footer>
         </PageContainer>
