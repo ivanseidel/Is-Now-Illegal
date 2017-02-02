@@ -1,0 +1,22 @@
+{
+  "name": "isnowillegal",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "./",
+  "scripts": {
+    "start": "forever --minUptime=5000 --spinSleepTime=5000 server.js"
+  },
+  "dependencies": {
+    "apicache": "^0.8.3",
+    "compression": "^1.6.2",
+    "express": "^4.14.1",
+    "forever": "^0.15.3",
+    "handlebars": "^4.0.6"
+  },
+  "author": {
+    "name": "Ivan Seidel",
+    "email": "ivanseidel@gmail.com",
+    "url": "https://github.com/ivanseidel"
+  },
+  "contributors": []
+}

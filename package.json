@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
-    "heroku-prebuild": "cd web && npm install --dev && npm run build"
+    "heroku-prebuild": "cd share && npm install --dev && npm run build"
   },
   "repository": {
     "type": "git",

@@ -11,7 +11,7 @@ var app = {}
 global.app = app
 
 // Load template
-var template = handlebars.compile(fs.readFileSync('build/index.html').toString());
+var template = handlebars.compile(fs.readFileSync('index.html').toString());
 
 // Home Page
 var home = template({
@@ -29,15 +29,6 @@ var home = template({
 app.express = express();
 app.express.use(compression());
 
-app.express.get('/', apicache('1 hour'), (req, res) => {
-	res.status(200).send(home)
-})
-
-app.express.get('/share/:gif', apicache('1 hour'), (req, res) => {
-	gif = encodeURIComponent(req.params.gif || '');
-	res.redirect(301, '/'+req.params.gif)
-})
-
 app.express.get('/:gif', apicache('10 minutes'), (req, res) => {
 	let gif = req.params.gif || ''
 	gif = gif.toUpperCase()
@@ -50,10 +41,10 @@ app.express.get('/:gif', apicache('10 minutes'), (req, res) => {
 		gif_url: href,
 		description: 'Declare things illegal and trump will sign it',
 		content_type: 'video.other',
+		share_url: 'http://isnowillegal.com/?'+gif
 	}));
 });
 
-app.express.use(express.static('build'));
 const PORT = process.env.PORT || 8080;
 app.express.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);

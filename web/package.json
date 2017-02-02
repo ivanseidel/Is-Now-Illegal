@@ -4,7 +4,6 @@
   "private": true,
   "homepage": "./",
   "scripts": {
-    "server": "forever --minUptime=5000 --spinSleepTime=5000 server.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
@@ -13,14 +12,9 @@
     "lint": "eslint ./src"
   },
   "dependencies": {
-    "apicache": "^0.8.3",
     "clipboard": "^1.5.16",
-    "compression": "^1.6.2",
     "downloadjs": "^1.4.7",
-    "express": "^4.14.1",
     "firebase": "^3.6.8",
-    "forever": "^0.15.3",
-    "handlebars": "^4.0.6",
     "react": "^15.4.2",
     "react-document-title": "^2.0.2",
     "react-dom": "^15.4.2",
