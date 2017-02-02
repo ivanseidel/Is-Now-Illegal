@@ -17,7 +17,6 @@ const FormInput = styled(Input)`
   flex: 1;
   background-color: #fff;
   color: #303030;
-  text-transform: uppercase;
   
   @media (max-width: 600px) {
     width: 100%;
@@ -50,13 +49,15 @@ class App extends Component {
     subject: React.PropTypes.string,
   };
 
-  state = { subject: this.props.subject || (window.location.hash || '').replace('#', '') };
+  state = {
+    subject: this.props.subject ||
+      (window.location.hash || '').replace('#', ''),
+  };
 
   componentDidMount = () => {
     const { backgroundColor, changeBackgroundColor } = this.props;
 
     changeBackgroundColor(backgroundColor);
-
     // if (window.location.search) {
     //   window.location.search = '';
     // }
@@ -70,9 +71,12 @@ class App extends Component {
     const formattedSubject = formatSubject(subject);
 
     // start gif creation in the server
-    firebase.database().ref('/queue/tasks').push({ task: 'gif', word: formattedSubject });
+    firebase
+      .database()
+      .ref('/queue/tasks')
+      .push({ task: 'gif', word: formattedSubject.toUpperCase() });
 
-    this.props.push(`/?${formattedSubject.toLowerCase()}`, { processing: true });
+    this.props.push(`/?${formattedSubject}`);
   };
 
   submitIllegalize = e => {
@@ -87,8 +91,12 @@ class App extends Component {
     return false;
   };
 
-  handleSubjectChange = e =>
-    this.setState({ subject: removeIllegalCharacters(e.target.value || '') });
+  handleSubjectChange = e => {
+    const subject = removeIllegalCharacters(e.target.value || '');
+
+    window.location.hash = subject;
+    this.setState({ subject });
+  };
 
   render() {
     const { subject } = this.state;

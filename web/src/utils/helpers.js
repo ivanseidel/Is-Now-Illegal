@@ -8,5 +8,5 @@ export function removeIllegalCharacters(str) {
 }
 
 export function formatSubject(str) {
-  return removeIllegalCharacters(str).trim().toUpperCase();
+  return removeIllegalCharacters(str).trim();
 }

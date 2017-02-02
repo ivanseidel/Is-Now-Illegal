@@ -149,25 +149,25 @@ class SharePage extends Component {
     // unlisten to previous gif database reference
     if (oldGifFirebaseRef) oldGifFirebaseRef.off();
 
-    const gifFirebaseRef = firebase.database().ref(`gifs/${subject}/url`);
+    const gifFirebaseRef = firebase
+      .database()
+      .ref(`gifs/${subject.toUpperCase()}/url`);
     gifFirebaseRef.on('value', snapshot => {
       const gifURL = snapshot.val() || '';
       // got the url, stop listening for changes
       if (gifURL) {
         gifFirebaseRef.off();
-        this.setState({
-          gifFirebaseRef,
-          gifURL,
-          loading: false,
-          processing: false,
-        }, () => {
-          this.updateBackgroundColor();
-          this.updateAddThis();
-        });
+        this.setState(
+          { gifFirebaseRef, gifURL, loading: false, processing: false },
+          () => {
+            this.updateBackgroundColor();
+            this.updateAddThis();
+          },
+        );
       } else if (!processing) {
         // user opened by url
         // we saw if exists. it didnt. so lets redirect it to the main page
-        push(`/#${subject}`, { subject });
+        push(`/#${subject}`);
       }
     });
   };
@@ -180,9 +180,16 @@ class SharePage extends Component {
   };
 
   updateAddThis = () => {
-    if (window.addthis && typeof window.addthis.layers.refresh === 'function') {
-      setTimeout(window.addthis.layers.refresh, 200);
-    }
+    setTimeout(
+      () => {
+        if (
+          window.addthis && typeof window.addthis.layers.refresh === 'function'
+        ) {
+          window.addthis.layers.refresh();
+        }
+      },
+      500,
+    );
   };
 
   updateBackgroundColor = () => {
