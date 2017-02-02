@@ -3,21 +3,24 @@
   <head>
     <title>IsNowIllegal</title>
 
-    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# video: http://ogp.me/ns/video#">
-    <meta property="fb:app_id"      content="1187540114634481" /> 
+    <!-- twitter meta tags -->
+    <meta name="twitter:image:src"   content="{{gif_url}}" />
 
-    <meta property="og:site_name"   content="{{site}}">
-    <meta property="og:url"         content="{{gif_url}}">
-    <meta property="og:title"       content="{{title}}">
-    <meta property="og:description" content="{{description}}">
-    <meta property="og:type"        content="{{content_type}}">
-    <meta property="og:image"       content="{{gif_url}}">
-    <meta property="og:image:width"  content="400">
-    <meta property="og:image:height" content="400">
+    <!-- facebook meta tags -->
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# video: http://ogp.me/ns/video#" />
+    <meta property="fb:app_id"       content="1187540114634481" />
+    <meta property="og:site_name"    content="{{site}}" />
+    <meta property="og:url"          content="{{gif_url}}" />
+    <meta property="og:title"        content="{{title}}" />
+    <meta property="og:description"  content="{{description}}" />
+    <meta property="og:type"         content="{{content_type}}" />
+    <meta property="og:image"        content="{{gif_url}}" />
+    <meta property="og:image:width"  content="400" />
+    <meta property="og:image:height" content="400" />
 
     <meta http-equiv="refresh" content="0; url={{share_url}}" />
   </head>
   <body>
-    <img src="{{gif_url}}"/>
+    <img src="{{gif_url}}" />
   </body>
 </html>
