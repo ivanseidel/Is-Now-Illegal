@@ -21,7 +21,7 @@ const padding = 20;
 const GifContainer = styled.div`
   margin: auto;
   padding: ${padding}px;
-  max-width: 400px;
+  max-width: 500px;
   background-color: #fff;
   border-radius: ${radius}px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
