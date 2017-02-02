@@ -58,7 +58,7 @@ export default class extends Component {
             </p>
             <p>A nerdy protest made by </p>
             <p>
-              <a href="https://github.com/ivanseidel" target="_blank">Ivan Seidal</a>,&nbsp;
+              <a href="https://github.com/ivanseidel" target="_blank">Ivan Seidel</a>,&nbsp;
               <a href="https://twitter.com/brunolemos" target="_blank">Bruno Lemos</a> &amp;&nbsp;
               <a href="https://github.com/joaopedrovbs" target="_blank">João Pedro</a>
             </p>
