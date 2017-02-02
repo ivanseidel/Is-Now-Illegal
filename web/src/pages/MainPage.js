@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import qs from 'qs';
 import { withRouter } from 'react-router-dom';
 
+import firebase from '../libs/firebase';
 import Button from '../components/Button';
 import CenterBox from '../components/CenterBox';
 import Form from '../components/Form';
@@ -68,6 +69,10 @@ class App extends Component {
     if (!subject) return;
 
     const formattedSubject = formatSubject(subject);
+
+    // start gif creation in the server
+    firebase.database().ref('/queue/tasks').push({ task: 'gif', word: formattedSubject });
+
     this.props.push(`/${formattedSubject.toLowerCase()}`, { processing: true });
   };
 

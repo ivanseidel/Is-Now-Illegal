@@ -80,7 +80,8 @@ const CopyButton = styled(Button)`
 `;
 
 class SharePage extends Component {
-  static defaultProps = { backgroundColor: colors.red, processing: false };
+  // TODO: Fix processing prop. Not being received by push('xx', { processing: true })
+  static defaultProps = { backgroundColor: colors.red, processing: !false };
 
   static propTypes = {
     backgroundColor: React.PropTypes.string,
@@ -96,7 +97,7 @@ class SharePage extends Component {
 
   state = {
     copiedURL: '',
-    loading: false,
+    loading: true,
     gifURL: '',
     gifFirebaseRef: null,
     processing: !!this.props.processing,

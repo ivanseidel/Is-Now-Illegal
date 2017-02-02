@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import './reset.css';
 import './index.css';
@@ -28,17 +28,19 @@ export default class extends Component {
     return (
       <Router basename={basename}>
         <PageContainer background={backgroundColor}>
-          <Route
-            exact
-            path="/"
-            component={MainPage}
-            changeBackgroundColor={this.changeBackgroundColor}
-          />
-          <Route
-            path="/:subject"
-            component={SharePage}
-            changeBackgroundColor={this.changeBackgroundColor}
-          />
+          <Switch>
+            <Route
+              path="/"
+              component={MainPage}
+              changeBackgroundColor={this.changeBackgroundColor}
+              exact
+            />
+            <Route
+              path="/:subject"
+              component={SharePage}
+              changeBackgroundColor={this.changeBackgroundColor}
+            />
+          </Switch>
         </PageContainer>
       </Router>
     );
