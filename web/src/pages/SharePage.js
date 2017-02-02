@@ -80,19 +80,19 @@ const CopyButton = styled(Button)`
 `;
 
 class SharePage extends Component {
-  static defaultProps = { action: '', backgroundColor: colors.red, processing: false };
+  static defaultProps = {
+    action: '',
+    backgroundColor: colors.red,
+    processing: false,
+  };
 
   static propTypes = {
     action: React.PropTypes.string,
     backgroundColor: React.PropTypes.string,
     changeBackgroundColor: React.PropTypes.func.isRequired,
-    match: React.PropTypes.shape({
-      params: React.PropTypes.shape({
-        subject: React.PropTypes.string.isRequired,
-      }).isRequired,
-    }).isRequired,
     processing: React.PropTypes.bool,
     push: React.PropTypes.func.isRequired,
+    subject: React.PropTypes.string.isRequired,
   };
 
   state = {
@@ -100,12 +100,10 @@ class SharePage extends Component {
     loading: true,
     gifURL: '',
     gifFirebaseRef: null,
-
     // TODO: Checking action as a workaroung
     // while we dont receive it as prop by doing  push('xx', { processing: true })
     processing: !!this.props.processing || this.props.action === 'PUSH',
-
-    subject: formatSubject(this.props.match.params.subject),
+    subject: formatSubject(this.props.subject),
   };
 
   componentDidMount = () => {
@@ -114,7 +112,7 @@ class SharePage extends Component {
     this.updateAddThis();
   };
 
-  componentWillReceiveProps = ({ match: { params: { subject } } }) => {
+  componentWillReceiveProps = ({ subject }) => {
     const formattedSubject = formatSubject(subject);
 
     if (formattedSubject && formattedSubject !== this.state.subject) {
@@ -168,7 +166,7 @@ class SharePage extends Component {
       } else if (!processing) {
         // user opened by url
         // we saw if exists. it didnt. so lets redirect it to the main page
-        push(`/?stuff=${subject}`, { subject });
+        push(`/#${subject}`, { subject });
       }
     });
   };

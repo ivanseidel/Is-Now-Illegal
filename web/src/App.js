@@ -31,13 +31,22 @@ export default class extends Component {
           <Switch>
             <Route
               path="/"
-              component={MainPage}
+              render={props => {
+                if (window.location.search[0] === '?') {
+                  const subject = window.location.search.replace('?', '');
+                  return <SharePage subject={subject} {...props} />;
+                }
+
+                return <MainPage {...props} />;
+              }}
               changeBackgroundColor={this.changeBackgroundColor}
               exact
             />
             <Route
               path="/:subject"
-              component={SharePage}
+              render={({ match: { params: { subject } }, ...props }) => (
+                <SharePage subject={subject} {...props} />
+              )}
               changeBackgroundColor={this.changeBackgroundColor}
             />
           </Switch>

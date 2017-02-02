@@ -51,7 +51,7 @@ class App extends Component {
     subject: React.PropTypes.string,
   };
 
-  state = { subject: this.props.subject || qs.parse(window.location.search.slice(1)).stuff || '' };
+  state = { subject: this.props.subject || (window.location.hash || '').replace('#', '') };
 
   componentDidMount = () => {
     const { backgroundColor, changeBackgroundColor } = this.props;
@@ -73,7 +73,7 @@ class App extends Component {
     // start gif creation in the server
     firebase.database().ref('/queue/tasks').push({ task: 'gif', word: formattedSubject });
 
-    this.props.push(`/${formattedSubject.toLowerCase()}`, { processing: true });
+    this.props.push(`/?${formattedSubject.toLowerCase()}`, { processing: true });
   };
 
   submitIllegalize = e => {
