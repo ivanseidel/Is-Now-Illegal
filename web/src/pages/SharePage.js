@@ -42,11 +42,11 @@ const SocialButtons = styled.div`
   flex: 1;
 `;
 
-// const DownloadButton = styled(Button)`
-//   margin-left: ${padding / 2}px;
-//   background-color: #3d3e3d;
-//   color: #fff;
-// `;
+const DownloadButton = styled(Button)`
+  margin-left: ${padding / 2}px;
+  background-color: #3d3e3d;
+  color: #fff;
+`;
 
 const Footer = styled.div`
   display: flex;
@@ -138,6 +138,9 @@ class SharePage extends Component {
     this.setState({ copiedURL: '' });
   };
 
+  getShareURL = () => `http://share.isnowillegal.com/${this.state.subject}`;
+  getDownloadURL = () => `http://share.isnowillegal.com/${this.state.subject}.gif`;
+
   loadGif = () => {
     const {
       gifFirebaseRef: oldGifFirebaseRef,
@@ -175,10 +178,8 @@ class SharePage extends Component {
   };
 
   download = () => {
-    const { gifURL } = this.state;
-    // const filename = `${subject}-is-now-illegal.gif`;
-    // TODO: rename the file to the filename above
-    download(gifURL);
+    // download(this.getDownloadURL());
+    alert('Right click at the Gif > Save image as...', 'How to download');
   };
 
   updateAddThis = () => {
@@ -229,7 +230,7 @@ class SharePage extends Component {
       );
     }
 
-    const shareURL = `http://share.isnowillegal.com/${subject}`;
+    const shareURL = this.getShareURL();
     const copied = copiedURL === shareURL;
 
     return (
@@ -246,6 +247,9 @@ class SharePage extends Component {
                   data-url={shareURL}
                 />
               </SocialButtons>
+              <DownloadButton size={14} onClick={this.download}>
+                Download
+              </DownloadButton>
             </ShareContainer>
             <Footer>
               <ShareLink href={shareURL}>{shareURL}</ShareLink>
@@ -264,9 +268,5 @@ class SharePage extends Component {
     );
   }
 }
-
-// <DownloadButton size={14} onClick={this.download}>
-//   Download
-// </DownloadButton>
 
 export default withRouter(SharePage);
