@@ -48,8 +48,8 @@ app.express.get('/:gif.gif', apicache('10 minutes'), (req, res) => {
 
 app.express.get('/:gif', apicache('10 minutes'), (req, res) => {
 	const gif = (req.params.gif || '').toUpperCase()
-	const uri = `http://share.isnowillegal.com/${gif}.gif`
-	// const uri = `https://storage.googleapis.com/is-now-illegal.appspot.com/gifs/${gif}.gif`;
+	// const uri = `http://share.isnowillegal.com/${gif}.gif`
+	const uri = `https://storage.googleapis.com/is-now-illegal.appspot.com/gifs/${gif}.gif`;
 
 	res.status(200).send(template({
 		url: uri,
