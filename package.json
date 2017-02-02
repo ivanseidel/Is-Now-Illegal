@@ -25,6 +25,7 @@
     "firebase-admin": "^4.0.6",
     "firebase-queue": "^1.6.1",
     "lodash": "^4.17.4",
+    "mustache": "^2.3.0",
     "python-shell": "^0.4.0"
   }
 }
