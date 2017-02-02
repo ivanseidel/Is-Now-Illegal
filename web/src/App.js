@@ -35,7 +35,7 @@ export default class extends Component {
               render={props => {
                 if (window.location.search[0] === '?') {
                   const subject = window.location.search.replace('?', '');
-                  return <SharePage subject={subject} {...props} />;
+                  return <SharePage subject={decodeURI(subject)} {...props} />;
                 }
 
                 return <MainPage {...props} />;
@@ -46,7 +46,7 @@ export default class extends Component {
             <Route
               path="/:subject"
               render={({ match: { params: { subject } }, ...props }) => (
-                <SharePage subject={subject} {...props} />
+                <SharePage subject={decodeURI(subject)} {...props} />
               )}
               changeBackgroundColor={this.changeBackgroundColor}
             />
