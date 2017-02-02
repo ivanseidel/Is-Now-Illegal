@@ -29,6 +29,10 @@ var home = template({
 app.express = express();
 app.express.use(compression());
 
+app.express.get('/', (req, res) => {
+	res.redirect('http://isnowillegal.com')
+})
+
 app.express.get('/:gif', apicache('10 minutes'), (req, res) => {
 	let gif = req.params.gif || ''
 	gif = gif.toUpperCase()
