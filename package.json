@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A NERD protest against Thrump's Immigration ban!",
   "main": "index.js",
-  "cacheDirectories": ["node_modules", "web/node_modules"],
+  "cacheDirectories": ["node_modules", "share/node_modules"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
