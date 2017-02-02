@@ -97,7 +97,7 @@ class App extends Component {
     return (
       <Page background="transparent">
         <CenterBox>
-          <H1>What's going to be illegal?</H1>
+          <H1>{"What's going to be illegal?"}</H1>
           <StyledForm onSubmit={this.submitIllegalize} radius={radius}>
             <FormInput
               innerRef={ref => {

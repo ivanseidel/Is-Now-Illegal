@@ -2,7 +2,7 @@
   "name": "isnowillegal",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ivanseidel.github.io/Is-Now-Illegal",
+  "homepage": "./",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
