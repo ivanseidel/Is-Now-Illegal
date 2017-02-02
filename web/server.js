@@ -34,11 +34,14 @@ app.express.get('/', apicache('1 hour'), (req, res) => {
 })
 
 app.express.get('/:gif', apicache('10 minutes'), (req, res) => {
-	let href = `https://storage.googleapis.com/is-now-illegal.appspot.com/gifs/${req.params.gif}.gif`
+	let gif = req.params.gif || ''
+	gif = gif.toUpperCase()
+	
+	let href = `https://storage.googleapis.com/is-now-illegal.appspot.com/gifs/${gif}.gif`
 	res.status(200).send(template({
 		url: href,
 		site: 'IsNowIllegal',
-		title: req.params.gif + ' Is Now Illegal',
+		title: gif + ' Is Now Illegal',
 		gif_url: href,
 		description: 'Declare things illegal and trump will sign it',
 		content_type: 'video.other',
