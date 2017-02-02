@@ -46,7 +46,7 @@ app.express.get('/:gif.gif', apicache('10 minutes'), (req, res) => {
   res.setHeader('Content-Encoding', 'sdch');
   res.setHeader('Content-Type', 'image/gif');
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.redirect(301, uri);
+  request.get(uri).pipe(res);
 });
 
 app.express.get('/:gif', apicache('10 minutes'), (req, res) => {
