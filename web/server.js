@@ -33,10 +33,15 @@ app.express.get('/', apicache('1 hour'), (req, res) => {
 	res.status(200).send(home)
 })
 
+app.express.get('/share/:gif', apicache('1 hour'), (req, res) => {
+	gif = encodeURIComponent(req.params.gif || '');
+	res.redirect('/'+req.params.gif)
+})
+
 app.express.get('/:gif', apicache('10 minutes'), (req, res) => {
 	let gif = req.params.gif || ''
 	gif = gif.toUpperCase()
-	
+
 	let href = `https://storage.googleapis.com/is-now-illegal.appspot.com/gifs/${gif}.gif`
 	res.status(200).send(template({
 		url: href,
