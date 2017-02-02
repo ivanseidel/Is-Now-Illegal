@@ -53,10 +53,15 @@ export default class extends Component {
           </Switch>
 
           <Footer>
+            <p>
+              <a className="github-button" href="https://github.com/ivanseidel/Is-Now-Illegal" data-style="mega" data-count-href="/ivanseidel/Is-Now-Illegal/stargazers" data-count-api="/repos/ivanseidel/Is-Now-Illegal#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star ivanseidel/Is-Now-Illegal on GitHub">Star on GitHub</a>
+            </p>
             <p>A nerdy protest made by </p>
-            <a href="https://github.com/ivanseidel" target="_blank">Ivan Seidal</a>,&nbsp;
-            <a href="https://twitter.com/brunolemos" target="_blank">Bruno Lemos</a> &amp;&nbsp;
-            <a href="https://github.com/joaopedrovbs" target="_blank">João Pedro</a>
+            <p>
+              <a href="https://github.com/ivanseidel" target="_blank">Ivan Seidal</a>,&nbsp;
+              <a href="https://twitter.com/brunolemos" target="_blank">Bruno Lemos</a> &amp;&nbsp;
+              <a href="https://github.com/joaopedrovbs" target="_blank">João Pedro</a>
+            </p>
           </Footer>
         </PageContainer>
       </Router>
