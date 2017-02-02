@@ -15,3 +15,13 @@ html, body, #root {
   width: 100%;
   min-height: 100%;
 }
+
+a, a:active, a:focus, a:link {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #fff;
+  text-decoration: underline;
+}

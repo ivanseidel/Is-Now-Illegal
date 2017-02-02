@@ -11,4 +11,8 @@ export default styled.input`
   &:focus {
     outline:none;
   }
+  
+  @media (max-width: 600px) {
+    text-align: center;
+  }
 `;

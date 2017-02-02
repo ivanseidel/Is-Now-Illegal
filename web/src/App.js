@@ -4,8 +4,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './reset.css';
 import './index.css';
 
-import PageContainer from './components/PageContainer';
+import Footer from './components/Footer';
 import MainPage from './pages/MainPage';
+import PageContainer from './components/PageContainer';
 import SharePage from './pages/SharePage';
 import { colors } from './styles/variables';
 
@@ -50,6 +51,13 @@ export default class extends Component {
               changeBackgroundColor={this.changeBackgroundColor}
             />
           </Switch>
+
+          <Footer>
+            <p>A nerdy protest made by: </p>
+            <a href="https://github.com/ivanseidel" target="_blank">Ivan Seidal</a>,&nbsp;
+            <a href="https://twitter.com/brunolemos" target="_blank">Bruno Lemos</a> &amp;&nbsp;
+            <a href="https://github.com/joaopedrovbs" target="_blank">João Pedro</a>
+          </Footer>
         </PageContainer>
       </Router>
     );

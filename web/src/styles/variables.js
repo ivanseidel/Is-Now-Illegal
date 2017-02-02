@@ -11,4 +11,5 @@ export const button = {
   foregroundColor: '#fff',
 };
 
+export const padding = 10;
 export const radius = 8;

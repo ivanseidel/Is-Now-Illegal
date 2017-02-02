@@ -9,7 +9,7 @@ import Form from '../components/Form';
 import H1 from '../components/H1';
 import Input from '../components/Input';
 import Page from '../components/Page';
-import { colors, radius } from '../styles/variables';
+import { colors, padding, radius } from '../styles/variables';
 import { SUBJECT_PATTERN_ALLOW } from '../utils/constants';
 import { formatSubject, removeIllegalCharacters } from '../utils/helpers';
 
@@ -28,13 +28,13 @@ const FormButton = styled(Button)`
   
   @media (max-width: 600px) {
     width: 100%;
-    margin-top: 10px;
+    margin-top: ${padding}px;
   }
 `;
 
 const StyledForm = styled(Form)`
   min-height: 70px;
-  padding: 10px;
+  padding: ${padding}px;
   background-color: #ed2127;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
 `;

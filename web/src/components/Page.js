@@ -8,7 +8,6 @@ import { APP_TITLE } from '../utils/constants';
 const Page = styled.div`
   display: flex;
   flex: 1;
-  min-height: 100%;
   background-color: ${({ background }) => background};
   padding: 20px;
   color: ${({ foreground }) => foreground};
