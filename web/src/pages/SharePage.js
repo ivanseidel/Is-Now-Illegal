@@ -225,7 +225,7 @@ class SharePage extends Component {
     const copied = copiedURL === shareURL;
 
     return (
-      <Page background="transparent">
+      <Page background="transparent" title={`${subject} Is Now Illegal!`}>
         <CenterBox>
           <H1><SubjectText>{subject}</SubjectText> is now illegal!</H1>
           <GifContainer>
