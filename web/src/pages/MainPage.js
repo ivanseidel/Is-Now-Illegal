@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import qs from 'qs';
 import { withRouter } from 'react-router-dom';
 
 import firebase from '../libs/firebase';

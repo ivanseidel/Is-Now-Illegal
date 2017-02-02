@@ -160,9 +160,10 @@ class SharePage extends Component {
           gifURL,
           loading: false,
           processing: false,
+        }, () => {
+          this.updateBackgroundColor();
+          this.updateAddThis();
         });
-        this.updateBackgroundColor();
-        this.updateAddThis();
       } else if (!processing) {
         // user opened by url
         // we saw if exists. it didnt. so lets redirect it to the main page
@@ -180,7 +181,7 @@ class SharePage extends Component {
 
   updateAddThis = () => {
     if (window.addthis && typeof window.addthis.layers.refresh === 'function') {
-      window.addthis.layers.refresh();
+      setTimeout(window.addthis.layers.refresh, 200);
     }
   };
 

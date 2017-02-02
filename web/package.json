@@ -15,7 +15,6 @@
     "clipboard": "^1.5.16",
     "downloadjs": "^1.4.7",
     "firebase": "^3.6.8",
-    "qs": "^6.3.0",
     "react": "^15.4.2",
     "react-document-title": "^2.0.2",
     "react-dom": "^15.4.2",
