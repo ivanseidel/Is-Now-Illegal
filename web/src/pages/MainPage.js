@@ -110,6 +110,7 @@ class App extends Component {
               onChange={this.handleSubjectChange}
               radius={radius}
               pattern={SUBJECT_PATTERN_ALLOW}
+              autoComplete="off"
               autoFocus
             />
             <FormButton
