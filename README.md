@@ -13,4 +13,4 @@ This is a little web application(WebApp) we made for people to have fun and pret
 
 ## How to use it?
 
-Go to [Is Now Legal](http://isnowlegal.com) and type what you want.
+Go to [Is Now Illegal](http://isnowillegal.com) and type what you want.
