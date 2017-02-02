@@ -1,1 +1,1 @@
-web: cd share && npm run server
+web: cd share && npm start
