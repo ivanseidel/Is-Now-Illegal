@@ -48,14 +48,14 @@ def computeAndLoadTextFontForSize(drawer, text, maxWidth):
 
 	# Measure text and find out position
 	maxSize = 50
-	minSize = 10
+	minSize = 5
 	curSize = maxSize
-	while curSize > minSize: 
+	while curSize >= minSize:
 		textFont = ImageFont.truetype('fonts/impact.ttf', size=curSize)
 		w, h = drawer.textsize(text, font=textFont)
 		
 		if w > maxWidth:
-			curSize -= 4
+			curSize -= 1
 		else:
 			print('Best size: %d' % curSize)
 			return
