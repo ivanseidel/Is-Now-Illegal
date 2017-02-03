@@ -1,9 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
+import Link from './Link';
 import { button, radius as defaultRadius } from '../styles/variables';
 
-const Button = styled.button`
+export const style = css`
   padding: ${({ size }) => `${size / 2}px ${size}px`};
   font-family: 'Alfa Slab One', 'sans-serif', Verdana;
   font-size: ${({ size }) => `${size}px`};
@@ -19,6 +20,10 @@ const Button = styled.button`
   &:focus {
     outline:none;
   }
+`;
+
+const Button = styled.button`
+  ${style}
 `;
 
 Button.defaultProps = {
@@ -38,3 +43,10 @@ Button.propTypes = {
 };
 
 export default Button;
+
+export const ButtonLink = styled(Link)`
+  ${style}
+`;
+
+ButtonLink.defaultProps = Button.defaultProps;
+ButtonLink.propTypes = Button.propTypes;

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 
 import firebase from '../libs/firebase';
-import Button from '../components/Button';
+import Button, { ButtonLink } from '../components/Button';
 import CenterBox from '../components/CenterBox';
 import LoadingPage, {
   defaultBackgroundColor as loadingBackgroundColor,
@@ -34,15 +34,20 @@ const Gif = styled.img`
 
 const Row = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: ${({ horizontal }) => (horizontal ? 'row' : 'column')};
   align-items: center;
   margin-top: ${padding}px;
-  color: ${({ muted }) => (muted ? '#999' : '333')};
+  color: ${({ muted, invert }) => (
+    muted
+      ? (invert ? '#ddd' : '#999')
+      : (invert ? '#fff' : '#333')
+  )};
   font-size: 16px;
   text-align: left;
 
   & a {
-    color: #000;
+    color: ${({ invert }) => (invert ? '#fff' : '#000')};
   }
 `;
 
@@ -50,7 +55,7 @@ const SocialButtons = styled.div`
   flex: 1;
 `;
 
-const DownloadButton = styled(Button)`
+const DownloadButton = styled(ButtonLink)`
   margin-left: ${padding / 2}px;
   background-color: #3d3e3d;
   color: #fff;
@@ -61,7 +66,7 @@ const Footer = styled.footer`
   align-items: center;
   margin: -${padding}px;
   margin-top: ${padding}px;
-  padding: ${padding}px 0;
+  padding-bottom: ${padding}px;
   border-bottom-left-radius: ${radius}px;
   border-bottom-right-radius: ${radius}px;
   background-color: ${colors.blue};
@@ -274,7 +279,7 @@ class SharePage extends Component {
           <H1><SubjectText>{subject}</SubjectText> is now illegal!</H1>
           <GifContainer>
             <Gif src={gifURL} loading={loading} />
-            <Row horizontal>
+            <Row horizontal invert>
               <SocialButtons>
                 <div
                   className="addthis_inline_share_toolbox"
@@ -282,7 +287,7 @@ class SharePage extends Component {
                   data-url={shareURL}
                 />
               </SocialButtons>
-              <DownloadButton size={14} onClick={this.download}>
+              <DownloadButton href={gifURL} size={14} download>
                 Download
               </DownloadButton>
             </Row>
@@ -293,15 +298,17 @@ class SharePage extends Component {
               </p>
             </Row>
             <Footer>
-              <ShareLink href={shareURL}>{shareURL}</ShareLink>
-              <CopyButton
-                innerRef={this.registerClipboardListener}
-                data-clipboard-text={shareURL}
-                size={12}
-                outline
-              >
-                {copied ? 'Copied!' : 'Copy'}
-              </CopyButton>
+              <Row horizontal invert>
+                <ShareLink href={shareURL}>{shareURL}</ShareLink>
+                <CopyButton
+                  innerRef={this.registerClipboardListener}
+                  data-clipboard-text={shareURL}
+                  size={12}
+                  outline
+                >
+                  {copied ? 'Copied!' : 'Copy'}
+                </CopyButton>
+              </Row>
             </Footer>
           </GifContainer>
         </CenterBox>
