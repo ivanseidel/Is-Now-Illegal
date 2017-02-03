@@ -61,7 +61,6 @@ const Footer = styled.div`
   align-items: center;
   margin: -${padding}px;
   margin-top: ${padding}px;
-  padding: ${padding / 2}px;
   border-bottom-left-radius: ${radius}px;
   border-bottom-right-radius: ${radius}px;
   background-color: ${colors.blue};
@@ -69,6 +68,7 @@ const Footer = styled.div`
 
 const ShareLink = styled.a`
   flex: 1;
+  padding-left: ${padding / 2}px;
   color: #fff;
   text-align: right;
   text-decoration: none;
@@ -80,6 +80,7 @@ const ShareLink = styled.a`
 
 const CopyButton = styled(Button)`
   margin-left: ${padding / 2}px;
+  padding-right: ${padding / 2}px;
   background-color: transparent;
   border-color: #fff;
   font-family: 'Alfa Slab One', 'sans-serif', Verdana;
