@@ -103,6 +103,7 @@ class SharePage extends Component {
     changeBackgroundColor: React.PropTypes.func.isRequired,
     processing: React.PropTypes.bool,
     push: React.PropTypes.func.isRequired,
+    setMessage: React.PropTypes.func.isRequired,
     subject: React.PropTypes.string.isRequired,
   };
 
@@ -134,9 +135,7 @@ class SharePage extends Component {
   };
 
   componentWillUnmount = () => {
-    const { gifFirebaseRef } = this.state;
-
-    if (gifFirebaseRef) gifFirebaseRef.off();
+    this.goOffline();
   };
 
   onCopySuccess = ({ text }) => {
@@ -151,18 +150,37 @@ class SharePage extends Component {
   getDownloadURL = () =>
     encodeURI(`http://share.isnowillegal.com/${this.state.subject}.gif`);
 
+  goOnline = () => {
+    firebase.database().goOnline();
+
+    clearInterval(this.interval);
+    // go offline after 20 seconds on this page
+    this.interval = setInterval(() => {
+      firebase.database().goOffline();
+    }, 20000);
+  };
+
+  goOffline = () => {
+    const { gifFirebaseRef } = this.state;
+
+    if (gifFirebaseRef) gifFirebaseRef.off();
+    firebase.database().goOffline();
+    clearInterval(this.interval);
+  };
+
   loadGif = () => {
     const {
       gifFirebaseRef: oldGifFirebaseRef,
       processing,
       subject,
     } = this.state;
-    const { push } = this.props;
+    const { push, setMessage } = this.props;
 
     this.setState({ loading: true });
 
     // unlisten to previous gif database reference
     if (oldGifFirebaseRef) oldGifFirebaseRef.off();
+    this.goOnline();
 
     const gifFirebaseRef = firebase
       .database()
@@ -172,6 +190,8 @@ class SharePage extends Component {
       // got the url, stop listening for changes
       if (gifURL) {
         gifFirebaseRef.off();
+        this.goOffline();
+        setMessage('');
         this.setState(
           { gifFirebaseRef, gifURL, loading: false, processing: false },
           () => {
@@ -180,6 +200,9 @@ class SharePage extends Component {
           },
         );
       } else if (!processing) {
+        this.goOffline();
+        setMessage('');
+
         // user opened by url
         // we saw if exists. it didnt. so lets redirect it to the main page
         push(`/#${subject}`);
@@ -228,13 +251,14 @@ class SharePage extends Component {
 
   render() {
     const { copiedURL, gifURL, loading, processing, subject } = this.state;
-    const { changeBackgroundColor } = this.props;
+    const { changeBackgroundColor, setMessage } = this.props;
 
     if (loading || processing) {
       return (
         <LoadingPage
           changeBackgroundColor={changeBackgroundColor}
           processing={processing}
+          setMessage={setMessage}
           subject={subject}
         />
       );

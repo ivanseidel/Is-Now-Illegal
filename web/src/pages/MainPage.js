@@ -70,6 +70,8 @@ class App extends Component {
 
     const formattedSubject = formatSubject(subject);
 
+    firebase.database().goOnline();
+
     // start gif creation in the server
     firebase
       .database()

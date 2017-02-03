@@ -33,14 +33,27 @@ class LoadingPage extends Component {
     backgroundColor: React.PropTypes.string,
     changeBackgroundColor: React.PropTypes.func.isRequired,
     processing: React.PropTypes.bool.isRequired,
+    push: React.PropTypes.func.isRequired,
+    setMessage: React.PropTypes.func.isRequired,
     subject: React.PropTypes.string.isRequired,
   };
 
   componentDidMount = () => {
-    const { backgroundColor, changeBackgroundColor } = this.props;
+    const { backgroundColor, changeBackgroundColor, push, setMessage, subject } = this.props;
 
     changeBackgroundColor(backgroundColor);
+
+    clearTimeout(this.timeout);
+    // only wait for the gif for a few seconds, then redirect
+    this.timeout = setTimeout(() => {
+      setMessage('We are having too many access! If it does not work for you, please bookmark this site and come back later.');
+      push(`/#${subject}`);
+    }, 10000);
   };
+
+  componentWillUnmount = () => {
+    clearTimeout(this.timeout);
+  }
 
   render() {
     const { processing, subject } = this.props;

@@ -28,22 +28,30 @@ const HeaderMessage = styled.p`
 `;
 
 export default class extends Component {
-  state = { backgroundColor: colors.blue };
+  state = { backgroundColor: colors.blue, message: '' };
+
+  setMessage = message => {
+    this.setState({ message });
+  };
 
   changeBackgroundColor = backgroundColor => {
     this.setState({ backgroundColor });
   };
 
   render() {
-    const { backgroundColor } = this.state;
+    const { backgroundColor, message } = this.state;
 
     return (
       <Router basename={basename}>
         <PageContainer background={backgroundColor}>
           <Header>
-            <HeaderMessage>
-              We are having too many access! If it does not work for you, please bookmark this site and come back later.
-            </HeaderMessage>
+            {
+              message && (
+                <HeaderMessage>
+                  {message}
+                </HeaderMessage>
+              )
+            }
           </Header>
           <Switch>
             <Route
@@ -57,6 +65,7 @@ export default class extends Component {
                 return <MainPage {...props} />;
               }}
               changeBackgroundColor={this.changeBackgroundColor}
+              setMessage={this.setMessage}
               exact
             />
             <Route
@@ -65,6 +74,7 @@ export default class extends Component {
                 <SharePage subject={decodeURI(subject)} {...props} />
               )}
               changeBackgroundColor={this.changeBackgroundColor}
+              setMessage={this.setMessage}
             />
           </Switch>
           <Footer>
