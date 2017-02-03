@@ -38,7 +38,7 @@ const Row = styled.div`
   align-items: center;
   margin-top: ${padding}px;
   color: ${({ muted }) => (muted ? '#999' : '333')};
-  font-size: 15px;
+  font-size: 16px;
   text-align: left;
 
   & a {
@@ -287,7 +287,7 @@ class SharePage extends Component {
             </Row>
             <Row muted>
               <p>
-                Twitter sharing tip: Download the image, then drag&amp;drop the file to{' '}
+                Twitter sharing tip: Download the image, then drag&amp;drop the file on{' '}
                 <a href="http://twitter.com" target="_blank">twitter.com</a>. Use the hashtag <a href="https://twitter.com/hashtag/IsNowIllegal?src=hash" target="_blank">#IsNowIllegal</a>.
               </p>
             </Row>
