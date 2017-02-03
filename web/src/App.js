@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import './reset.css';
@@ -9,13 +10,21 @@ import Footer from './components/Footer';
 import MainPage from './pages/MainPage';
 import PageContainer from './components/PageContainer';
 import SharePage from './pages/SharePage';
-import { colors } from './styles/variables';
+import { colors, padding } from './styles/variables';
 
 // fix github page router path handler
 const basename = window.location.hostname.indexOf('github') >= 0 &&
   window.location.pathname.split('/')[1]
   ? `/${window.location.pathname.split('/')[1]}`
   : undefined;
+
+const Header = styled.header`
+  padding: ${padding}px;
+  text-align: center;
+`;
+const HeaderMessage = styled.p`
+  color: lightyellow;
+`;
 
 export default class extends Component {
   state = { backgroundColor: colors.blue };
@@ -30,6 +39,11 @@ export default class extends Component {
     return (
       <Router basename={basename}>
         <PageContainer background={backgroundColor}>
+          <Header>
+            <HeaderMessage>
+              We are having too many access! If it does not work, please try again in the next day
+            </HeaderMessage>
+          </Header>
           <Switch>
             <Route
               path="/"
@@ -69,24 +83,15 @@ export default class extends Component {
             </p>
             <p>A nerdy protest made by </p>
             <p>
-              <Link
-                href="https://github.com/ivanseidel"
-                target="_blank"
-              >
+              <Link href="https://github.com/ivanseidel" target="_blank">
                 Ivan Seidel
               </Link>
               {', '}
-              <Link
-                href="https://twitter.com/brunolemos"
-                target="_blank"
-              >
+              <Link href="https://twitter.com/brunolemos" target="_blank">
                 Bruno Lemos
               </Link>
               {' & '}
-              <Link
-                href="https://github.com/joaopedrovbs"
-                target="_blank"
-              >
+              <Link href="https://github.com/joaopedrovbs" target="_blank">
                 João Pedro
               </Link>
             </p>
