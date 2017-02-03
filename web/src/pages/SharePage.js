@@ -82,7 +82,7 @@ const ShareLink = styled.a`
   font-family: 'Alfa Slab One', 'sans-serif', Verdana;
   font-size: 12px;
   font-weight: 300;
-  opacity: 0.95;
+  opacity: ${({ muted }) => (muted ? 0.6 : 0.95)};
 `;
 
 const CopyButton = styled(Button)`
@@ -317,9 +317,6 @@ class SharePage extends Component {
             </Row>
             <Footer>
               <Row horizontal invert>
-                <ShareLink href={shareURL}>{shareURL}</ShareLink>
-              </Row>
-              <Row horizontal invert>
                 <CopyButton
                   innerRef={this.registerClipboardListener}
                   data-clipboard-text={shareURL}
@@ -344,6 +341,9 @@ class SharePage extends Component {
                       : ' Copy GIF link '
                   }
                 </CopyButton>
+              </Row>
+              <Row horizontal invert>
+                <ShareLink href={shareURL} muted>{shareURL}</ShareLink>
               </Row>
             </Footer>
           </GifContainer>

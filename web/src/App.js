@@ -69,7 +69,7 @@ export default class extends Component {
                 href="https://www.producthunt.com/posts/is-now-illegal"
                 target="_blank"
               >
-                We are on Product Hunt! Check it out!
+                We are on Product Hunt, check it out!
               </a>
             </p>
           </ProductHuntHeader>
