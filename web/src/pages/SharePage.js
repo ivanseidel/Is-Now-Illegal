@@ -298,7 +298,7 @@ class SharePage extends Component {
             <Row muted>
               <p>
                 👉 Sharing tip: Download the image, then upload where you want (e.g{' '}
-                <a href="http://twitter.com" target="_blank">twitter.com</a>). It's better that the above buttons.
+                <a href="http://twitter.com" target="_blank">twitter.com</a>). It's better than the above buttons.
               </p>
             </Row>
             <Footer>
