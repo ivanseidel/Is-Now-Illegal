@@ -275,7 +275,7 @@ class SharePage extends Component {
     }
 
     const shareURL = this.getShareURL();
-    const gifURLtoCopy = gifURL;// this.getBeautifulGifURL();
+    const gifURLtoCopy = this.getBeautifulGifURL();
 
     return (
       <Page background="transparent" title={`${subject} Is Now Illegal!`}>
