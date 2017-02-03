@@ -18,20 +18,14 @@ const basename = window.location.hostname.indexOf('github') >= 0 &&
   ? `/${window.location.pathname.split('/')[1]}`
   : undefined;
 
-// const Header = styled.header`
-//   padding: ${padding}px;
-//   text-align: center;
-// `;
+const Header = styled.header`
+  padding: ${padding}px;
+  text-align: center;
+`;
 
-// const HeaderMessage = styled.p`
-//   color: lightyellow;
-// `;
-
-// <Header>
-//   <HeaderMessage>
-//     We are having too many access! If it does not work, please try again in the next day
-//   </HeaderMessage>
-// </Header>
+const HeaderMessage = styled.p`
+  color: lightyellow;
+`;
 
 export default class extends Component {
   state = { backgroundColor: colors.blue };
@@ -46,6 +40,11 @@ export default class extends Component {
     return (
       <Router basename={basename}>
         <PageContainer background={backgroundColor}>
+          <Header>
+            <HeaderMessage>
+              We are having too many access! If it does not work for you, please bookmark this site and come back later.
+            </HeaderMessage>
+          </Header>
           <Switch>
             <Route
               path="/"
