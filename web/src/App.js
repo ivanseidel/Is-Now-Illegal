@@ -85,7 +85,6 @@ export default class extends Component {
                 data-count-api="/repos/ivanseidel/Is-Now-Illegal#stargazers_count"
                 data-count-aria-label="# stargazers on GitHub"
                 aria-label="Star ivanseidel/Is-Now-Illegal on GitHub"
-                onClick={() => alert('a')}
               >
                 Star on GitHub
               </Link>
