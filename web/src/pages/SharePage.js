@@ -43,7 +43,7 @@ const Row = styled.div`
       ? (invert ? '#ddd' : '#999')
       : (invert ? '#fff' : '#333')
   )};
-  font-size: 16px;
+  font-size: 17px;
   text-align: left;
 
   & a {
@@ -293,8 +293,8 @@ class SharePage extends Component {
             </Row>
             <Row muted>
               <p>
-                Twitter sharing tip: Download the image, then drag&amp;drop the file on{' '}
-                <a href="http://twitter.com" target="_blank">twitter.com</a>. Use the hashtag <a href="https://twitter.com/hashtag/IsNowIllegal?src=hash" target="_blank">#IsNowIllegal</a>.
+                👉 Sharing tip: Download the image, then upload where you want (e.g{' '}
+                <a href="http://twitter.com" target="_blank">twitter.com</a>). It's better that the above buttons.
               </p>
             </Row>
             <Footer>
