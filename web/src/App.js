@@ -61,6 +61,7 @@ export default class extends Component {
           <ProductHuntHeader>
             <img
               src={`${process.env.PUBLIC_URL}/img/producthunt-kitty-logo.png`}
+              alt="Product Hunt Logo"
               height="40"
             />
             <p>

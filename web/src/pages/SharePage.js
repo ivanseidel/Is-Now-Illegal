@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Clipboard from 'clipboard';
 import styled from 'styled-components';
 // import download from 'downloadjs';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link as RouterLink } from 'react-router-dom';
 
 import firebase from '../libs/firebase';
 import Button, { ButtonLink } from '../components/Button';
@@ -153,8 +153,12 @@ class SharePage extends Component {
     this.setState({ copiedURL: '' });
   };
 
-  getBeautifulGifURL = () => tryEncodeURI(`http://share.isnowillegal.com/${this.state.subject.toUpperCase()}.gif`);
-  getShareURL = () => tryEncodeURI(`http://share.isnowillegal.com/${this.state.subject}`);
+  getBeautifulGifURL = () =>
+    tryEncodeURI(
+      `http://share.isnowillegal.com/${this.state.subject.toUpperCase()}.gif`,
+    );
+  getShareURL = () =>
+    tryEncodeURI(`http://share.isnowillegal.com/${this.state.subject}`);
   getDownloadURL = () =>
     tryEncodeURI(`http://share.isnowillegal.com/${this.state.subject}.gif`);
 
@@ -163,9 +167,12 @@ class SharePage extends Component {
 
     clearInterval(this.interval);
     // go offline after 20 seconds on this page
-    this.interval = setInterval(() => {
-      firebase.database().goOffline();
-    }, 20000);
+    this.interval = setInterval(
+      () => {
+        firebase.database().goOffline();
+      },
+      20000,
+    );
   };
 
   goOffline = () => {
@@ -248,9 +255,8 @@ class SharePage extends Component {
 
     // TODO: Improve this later.
     // if (this.clipboardInstance) {
-      // this.clipboardInstance.destroy();
+    // this.clipboardInstance.destroy();
     // }
-
     const clipboardInstance = new Clipboard(htmlElementRef);
 
     clipboardInstance.on('success', this.onCopySuccess);
@@ -258,7 +264,6 @@ class SharePage extends Component {
   };
 
   // clipboardInstance = null;
-
   render() {
     const { copiedURL, gifURL, loading, processing, subject } = this.state;
     const { changeBackgroundColor, setMessage } = this.props;
@@ -297,15 +302,23 @@ class SharePage extends Component {
             </Row>
             <Row muted>
               <p>
-                👉 Sharing tip: Download the image, then upload where you want (e.g{' '}
-                <a href="http://twitter.com" target="_blank">twitter.com</a>). It's better do this than use above sharing buttons!
+                👉 Sharing tip: Download the image, then upload where you want
+                (e.g
+                {' '}
+                <a href="http://twitter.com" target="_blank">twitter.com</a>
+                ).
+
+                {"It's better do this than use above sharing buttons!"}
+              </p>
+              <br />
+              <p>
+                <RouterLink to="/">Make another thing illegal</RouterLink>
               </p>
             </Row>
             <Footer>
               <Row horizontal invert>
                 <ShareLink href={shareURL}>{shareURL}</ShareLink>
               </Row>
-
               <Row horizontal invert>
                 <CopyButton
                   innerRef={this.registerClipboardListener}
@@ -313,16 +326,23 @@ class SharePage extends Component {
                   size={12}
                   outline
                 >
-                  {copiedURL === shareURL ? 'Copied share link!' : ' Copy share link '}
+                  {
+                    copiedURL === shareURL
+                      ? 'Copied share link!'
+                      : ' Copy share link '
+                  }
                 </CopyButton>
-
                 <CopyButton
                   innerRef={this.registerClipboardListener}
                   data-clipboard-text={gifURLtoCopy}
                   size={12}
                   outline
                 >
-                  {copiedURL === gifURLtoCopy ? 'Copied GIF Link!' : ' Copy GIF link '}
+                  {
+                    copiedURL === gifURLtoCopy
+                      ? 'Copied GIF Link!'
+                      : ' Copy GIF link '
+                  }
                 </CopyButton>
               </Row>
             </Footer>
