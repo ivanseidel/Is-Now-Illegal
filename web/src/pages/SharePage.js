@@ -275,7 +275,7 @@ class SharePage extends Component {
     }
 
     const shareURL = this.getShareURL();
-    const beautifulGifURL = this.getBeautifulGifURL();
+    const gifURLtoCopy = gifURL;// this.getBeautifulGifURL();
 
     return (
       <Page background="transparent" title={`${subject} Is Now Illegal!`}>
@@ -318,11 +318,11 @@ class SharePage extends Component {
 
                 <CopyButton
                   innerRef={this.registerClipboardListener}
-                  data-clipboard-text={beautifulGifURL}
+                  data-clipboard-text={gifURLtoCopy}
                   size={12}
                   outline
                 >
-                  {copiedURL === beautifulGifURL ? 'Copied GIF Link!' : ' Copy GIF link '}
+                  {copiedURL === gifURLtoCopy ? 'Copied GIF Link!' : ' Copy GIF link '}
                 </CopyButton>
               </Row>
             </Footer>
