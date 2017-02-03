@@ -63,6 +63,7 @@ const DownloadButton = styled(ButtonLink)`
 
 const Footer = styled.footer`
   display: flex;
+  flex-direction: column;
   align-items: center;
   margin: -${padding}px;
   margin-top: ${padding}px;
@@ -152,6 +153,7 @@ class SharePage extends Component {
     this.setState({ copiedURL: '' });
   };
 
+  getBeautifulGifURL = () => tryEncodeURI(`http://share.isnowillegal.com/${this.state.subject.toUpperCase()}.gif`);
   getShareURL = () => tryEncodeURI(`http://share.isnowillegal.com/${this.state.subject}`);
   getDownloadURL = () =>
     tryEncodeURI(`http://share.isnowillegal.com/${this.state.subject}.gif`);
@@ -244,16 +246,18 @@ class SharePage extends Component {
   registerClipboardListener = htmlElementRef => {
     if (!htmlElementRef) return;
 
-    if (this.clipboardInstance) {
-      this.clipboardInstance.destroy();
-    }
+    // TODO: Improve this later.
+    // if (this.clipboardInstance) {
+      // this.clipboardInstance.destroy();
+    // }
 
-    this.clipboardInstance = new Clipboard(htmlElementRef);
-    this.clipboardInstance.on('success', this.onCopySuccess);
-    this.clipboardInstance.on('error', this.onCopyFailed);
+    const clipboardInstance = new Clipboard(htmlElementRef);
+
+    clipboardInstance.on('success', this.onCopySuccess);
+    clipboardInstance.on('error', this.onCopyFailed);
   };
 
-  clipboardInstance = null;
+  // clipboardInstance = null;
 
   render() {
     const { copiedURL, gifURL, loading, processing, subject } = this.state;
@@ -271,7 +275,7 @@ class SharePage extends Component {
     }
 
     const shareURL = this.getShareURL();
-    const copied = copiedURL === shareURL;
+    const beautifulGifURL = this.getBeautifulGifURL();
 
     return (
       <Page background="transparent" title={`${subject} Is Now Illegal!`}>
@@ -300,13 +304,25 @@ class SharePage extends Component {
             <Footer>
               <Row horizontal invert>
                 <ShareLink href={shareURL}>{shareURL}</ShareLink>
+              </Row>
+
+              <Row horizontal invert>
                 <CopyButton
                   innerRef={this.registerClipboardListener}
                   data-clipboard-text={shareURL}
                   size={12}
                   outline
                 >
-                  {copied ? 'Copied!' : 'Copy'}
+                  {copiedURL === shareURL ? 'Copied share link!' : ' Copy share link '}
+                </CopyButton>
+
+                <CopyButton
+                  innerRef={this.registerClipboardListener}
+                  data-clipboard-text={beautifulGifURL}
+                  size={12}
+                  outline
+                >
+                  {copiedURL === beautifulGifURL ? 'Copied GIF Link!' : ' Copy GIF link '}
                 </CopyButton>
               </Row>
             </Footer>
