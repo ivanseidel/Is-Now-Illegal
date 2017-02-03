@@ -66,9 +66,8 @@ class App extends Component {
   subjectInput = null;
 
   illegalize = subject => {
-    if (!subject) return;
-
     const formattedSubject = formatSubject(subject);
+    if (!formattedSubject) return;
 
     firebase.database().goOnline();
 

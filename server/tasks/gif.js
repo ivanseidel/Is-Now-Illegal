@@ -13,10 +13,10 @@ module.exports = (data, progress, resolve, reject) => {
   let startTime = Date.now()
 
   // Read Information about gif
-  let gifWord = data.word
+  let gifWord = (data.word || '').trim()
 
   // Validate gif word
-  let validChars = /^[a-zA-Z0-9\s\#\$\%\*\"\!\?\@]+$/i
+  let validChars = /^[a-zA-Z0-9\s]+$/i
   if(!gifWord || gifWord.length > 10 || !validChars.test(gifWord)){
     console.log(`[${gifWord}] Rejecting(validation): `, data)
     return reject()
