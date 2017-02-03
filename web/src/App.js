@@ -35,8 +35,20 @@ const MessageHeader = styled.header`
   }
 `;
 
+const hideProductHuntHeader = localStorage.hideProductHuntHeader;
+
 export default class extends Component {
   state = { backgroundColor: colors.blue, message: '' };
+
+  componentDidMount = () => {
+    // never show product hunt header again after it being visible of 10s
+    setTimeout(
+      () => {
+        localStorage.hideProductHuntHeader = true;
+      },
+      10000,
+    );
+  };
 
   setMessage = message => {
     this.setState({ message });
@@ -57,23 +69,28 @@ export default class extends Component {
       <Router basename={basename}>
         <PageContainer background={backgroundColor}>
           {
-          !localStorage.fromProductHunt &&
-          <ProductHuntHeader>
-            <img
-              src={`${process.env.PUBLIC_URL}/img/producthunt-kitty-logo.png`}
-              alt="Product Hunt Logo"
-              height="40"
-            />
-            <p>
-              <a
-                href="https://www.producthunt.com/posts/is-now-illegal"
-                target="_blank"
-              >
-                We are on Product Hunt, check it out!
-              </a>
-            </p>
-          </ProductHuntHeader>
-        }
+            !localStorage.fromProductHunt &&
+              !hideProductHuntHeader &&
+              (
+                <ProductHuntHeader>
+                  <img
+                    src={
+                      `${process.env.PUBLIC_URL}/img/producthunt-kitty-logo.png`
+                    }
+                    alt="Product Hunt Logo"
+                    height="40"
+                  />
+                  <p>
+                    <Link
+                      href="https://www.producthunt.com/posts/is-now-illegal"
+                      target="_blank"
+                    >
+                      We are on Product Hunt, check it out!
+                    </Link>
+                  </p>
+                </ProductHuntHeader>
+              )
+          }
           <MessageHeader>
             {message && <p>{message}</p>}
           </MessageHeader>
@@ -85,12 +102,12 @@ export default class extends Component {
                   ? tryDecodeURI(window.location.search.replace('?', ''))
                   : '';
 
-                const possibleSubject = tryDecodeURI(removeIllegalCharacters(urlParam));
+                const possibleSubject = tryDecodeURI(
+                  removeIllegalCharacters(urlParam),
+                );
 
                 if (possibleSubject && possibleSubject === urlParam) {
-                  return (
-                    <SharePage subject={possibleSubject} {...props} />
-                  );
+                  return <SharePage subject={possibleSubject} {...props} />;
                 }
 
                 return <MainPage {...props} />;
