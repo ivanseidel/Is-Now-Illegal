@@ -77,6 +77,7 @@ class App extends Component {
       .ref('/queue/tasks')
       .push({ task: 'gif', word: formattedSubject.toUpperCase() });
 
+    window.location.hash = subject;
     this.props.push(`/?${formattedSubject}`);
   };
 
