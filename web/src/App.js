@@ -8,7 +8,7 @@ import MainPage from './pages/MainPage';
 import PageContainer from './components/PageContainer';
 import SharePage from './pages/SharePage';
 import { colors, padding } from './styles/variables';
-import { tryDecodeURI } from './utils/helpers';
+import { tryDecodeURI, removeIllegalCharacters } from './utils/helpers';
 
 // fix github page router path handler
 const basename = window.location.hostname.indexOf('github') >= 0 &&
@@ -16,13 +16,23 @@ const basename = window.location.hostname.indexOf('github') >= 0 &&
   ? `/${window.location.pathname.split('/')[1]}`
   : undefined;
 
-const Header = styled.header`
+const ProductHuntHeader = styled.header`
+  background-color: #da552f;
   padding: ${padding}px;
   text-align: center;
+
+  p {
+    color: #fff;
+  }
 `;
 
-const HeaderMessage = styled.p`
-  color: lightyellow;
+const MessageHeader = styled.header`
+  padding: ${padding}px;
+  text-align: center;
+
+  p {
+    color: lightyellow;
+  }
 `;
 
 export default class extends Component {
@@ -39,25 +49,47 @@ export default class extends Component {
   render() {
     const { backgroundColor, message } = this.state;
 
+    if (window.location.search.indexOf('ref=producthunt') >= 0) {
+      localStorage.fromProductHunt = true;
+    }
+
     return (
       <Router basename={basename}>
         <PageContainer background={backgroundColor}>
-          <Header>
-            {
-              message && (
-                <HeaderMessage>
-                  {message}
-                </HeaderMessage>
-              )
-            }
-          </Header>
+          {
+          !localStorage.fromProductHunt &&
+          <ProductHuntHeader>
+            <img
+              src={`${process.env.PUBLIC_URL}/img/producthunt-kitty-logo.png`}
+              height="40"
+            />
+            <p>
+              <a
+                href="https://www.producthunt.com/posts/is-now-illegal"
+                target="_blank"
+              >
+                We are on Product Hunt! Check it out!
+              </a>
+            </p>
+          </ProductHuntHeader>
+        }
+          <MessageHeader>
+            {message && <p>{message}</p>}
+          </MessageHeader>
           <Switch>
             <Route
               path="/"
               render={props => {
-                if (window.location.search[0] === '?') {
-                  const subject = window.location.search.replace('?', '');
-                  return <SharePage subject={tryDecodeURI(subject)} {...props} />;
+                const urlParam = window.location.search[0] === '?'
+                  ? window.location.search.replace('?', '')
+                  : '';
+
+                const possibleSubject = removeIllegalCharacters(urlParam);
+
+                if (possibleSubject && possibleSubject === urlParam) {
+                  return (
+                    <SharePage subject={tryDecodeURI(possibleSubject)} {...props} />
+                  );
                 }
 
                 return <MainPage {...props} />;
