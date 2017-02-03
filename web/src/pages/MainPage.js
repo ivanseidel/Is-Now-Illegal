@@ -94,7 +94,9 @@ class App extends Component {
   handleSubjectChange = e => {
     const subject = removeIllegalCharacters(e.target.value || '');
 
-    window.location.hash = subject;
+    // disabled because it was addind any char change to the browser history
+    // window.location.hash = subject;
+
     this.setState({ subject });
   };
 
