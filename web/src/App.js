@@ -81,14 +81,14 @@ export default class extends Component {
               path="/"
               render={props => {
                 const urlParam = window.location.search[0] === '?'
-                  ? window.location.search.replace('?', '')
+                  ? tryDecodeURI(window.location.search.replace('?', ''))
                   : '';
 
-                const possibleSubject = removeIllegalCharacters(urlParam);
+                const possibleSubject = tryDecodeURI(removeIllegalCharacters(urlParam));
 
                 if (possibleSubject && possibleSubject === urlParam) {
                   return (
-                    <SharePage subject={tryDecodeURI(possibleSubject)} {...props} />
+                    <SharePage subject={possibleSubject} {...props} />
                   );
                 }
 
