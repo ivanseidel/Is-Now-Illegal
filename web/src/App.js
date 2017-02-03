@@ -8,6 +8,7 @@ import MainPage from './pages/MainPage';
 import PageContainer from './components/PageContainer';
 import SharePage from './pages/SharePage';
 import { colors, padding } from './styles/variables';
+import { tryDecodeURI } from './utils/helpers';
 
 // fix github page router path handler
 const basename = window.location.hostname.indexOf('github') >= 0 &&
@@ -56,7 +57,7 @@ export default class extends Component {
               render={props => {
                 if (window.location.search[0] === '?') {
                   const subject = window.location.search.replace('?', '');
-                  return <SharePage subject={decodeURI(subject)} {...props} />;
+                  return <SharePage subject={tryDecodeURI(subject)} {...props} />;
                 }
 
                 return <MainPage {...props} />;
@@ -68,7 +69,7 @@ export default class extends Component {
             <Route
               path="/:subject"
               render={({ match: { params: { subject } }, ...props }) => (
-                <SharePage subject={decodeURI(subject)} {...props} />
+                <SharePage subject={tryDecodeURI(subject)} {...props} />
               )}
               changeBackgroundColor={this.changeBackgroundColor}
               setMessage={this.setMessage}

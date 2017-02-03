@@ -14,7 +14,7 @@ import H1 from '../components/H1';
 import Page from '../components/Page';
 import SubjectText from '../components/SubjectText';
 import { colors, radius } from '../styles/variables';
-import { formatSubject } from '../utils/helpers';
+import { formatSubject, tryEncodeURI } from '../utils/helpers';
 
 const padding = 20;
 
@@ -147,9 +147,9 @@ class SharePage extends Component {
     this.setState({ copiedURL: '' });
   };
 
-  getShareURL = () => encodeURI(`http://share.isnowillegal.com/${this.state.subject}`);
+  getShareURL = () => tryEncodeURI(`http://share.isnowillegal.com/${this.state.subject}`);
   getDownloadURL = () =>
-    encodeURI(`http://share.isnowillegal.com/${this.state.subject}.gif`);
+    tryEncodeURI(`http://share.isnowillegal.com/${this.state.subject}.gif`);
 
   goOnline = () => {
     firebase.database().goOnline();
