@@ -12,7 +12,7 @@ textFont = None
 # Rotoscope function. Pass in the:
 # - Destination image
 # - Image to be warped
-# - Rotoscpoe object with 'corners' and 'show' properties
+# - Rotoscope object with 'corners' and 'show' properties
 def rotoscope(dst, warp, properties):
 	if properties['show'] == False:
 		return dst
