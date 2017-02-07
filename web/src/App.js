@@ -16,16 +16,6 @@ const basename = window.location.hostname.indexOf('github') >= 0 &&
   ? `/${window.location.pathname.split('/')[1]}`
   : undefined;
 
-const ProductHuntHeader = styled.header`
-  background-color: #da552f;
-  padding: ${padding}px;
-  text-align: center;
-
-  p {
-    color: #fff;
-  }
-`;
-
 const MessageHeader = styled.header`
   padding: ${padding}px;
   text-align: center;
@@ -35,20 +25,8 @@ const MessageHeader = styled.header`
   }
 `;
 
-const hideProductHuntHeader = localStorage.hideProductHuntHeader;
-
 export default class extends Component {
   state = { backgroundColor: colors.blue, message: '' };
-
-  componentDidMount = () => {
-    // never show product hunt header again after it being visible of 10s
-    setTimeout(
-      () => {
-        localStorage.hideProductHuntHeader = true;
-      },
-      10000,
-    );
-  };
 
   setMessage = message => {
     this.setState({ message });
@@ -68,29 +46,6 @@ export default class extends Component {
     return (
       <Router basename={basename}>
         <PageContainer background={backgroundColor}>
-          {
-            !localStorage.fromProductHunt &&
-              !hideProductHuntHeader &&
-              (
-                <ProductHuntHeader>
-                  <img
-                    src={
-                      `${process.env.PUBLIC_URL}/img/producthunt-kitty-logo.png`
-                    }
-                    alt="Product Hunt Logo"
-                    height="40"
-                  />
-                  <p>
-                    <Link
-                      href="https://www.producthunt.com/posts/is-now-illegal"
-                      target="_blank"
-                    >
-                      We are on Product Hunt, check it out!
-                    </Link>
-                  </p>
-                </ProductHuntHeader>
-              )
-          }
           <MessageHeader>
             {message && <p>{message}</p>}
           </MessageHeader>
