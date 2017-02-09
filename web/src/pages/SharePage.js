@@ -280,7 +280,7 @@ class SharePage extends Component {
     }
 
     const shareURL = this.getShareURL();
-    const gifURLtoCopy = this.getBeautifulGifURL();
+    // const gifURLtoCopy = this.getBeautifulGifURL();
 
     return (
       <Page background="transparent" title={`${subject} Is Now Illegal!`}>
@@ -329,18 +329,6 @@ class SharePage extends Component {
                       : ' Copy share link '
                   }
                 </CopyButton>
-                <CopyButton
-                  innerRef={this.registerClipboardListener}
-                  data-clipboard-text={gifURLtoCopy}
-                  size={12}
-                  outline
-                >
-                  {
-                    copiedURL === gifURLtoCopy
-                      ? 'Copied GIF Link!'
-                      : ' Copy GIF link '
-                  }
-                </CopyButton>
               </Row>
               <Row horizontal invert>
                 <ShareLink href={shareURL} muted>{shareURL}</ShareLink>
@@ -352,5 +340,18 @@ class SharePage extends Component {
     );
   }
 }
+
+// <CopyButton
+//   innerRef={this.registerClipboardListener}
+//   data-clipboard-text={gifURLtoCopy}
+//   size={12}
+//   outline
+// >
+//   {
+//     copiedURL === gifURLtoCopy
+//       ? 'Copied GIF Link!'
+//       : ' Copy GIF link '
+//   }
+// </CopyButton>
 
 export default withRouter(SharePage);
