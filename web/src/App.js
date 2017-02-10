@@ -64,7 +64,7 @@ export default class extends Component {
                 target="_blank"
               >
                 <span>This website will shutdown if we cant pay the server costs.</span><br />
-                <span>Click to for more info about donation.</span>
+                <span>Click here for more info about donation.</span>
 
               </Link>
             </p>
