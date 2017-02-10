@@ -16,8 +16,18 @@ const basename = window.location.hostname.indexOf('github') >= 0 &&
   ? `/${window.location.pathname.split('/')[1]}`
   : undefined;
 
+const DonationHeader = styled.header`
+  background-color: #e6461a;
+  padding: ${2 * padding}px ${padding}px;
+  text-align: center;
+
+  p {
+    color: #fff;
+  }
+`;
+
 const MessageHeader = styled.header`
-  padding: ${padding}px;
+  padding: ${2 * padding}px ${padding}px;
   text-align: center;
 
   p {
@@ -46,6 +56,19 @@ export default class extends Component {
     return (
       <Router basename={basename}>
         <PageContainer background={backgroundColor}>
+          <DonationHeader>
+            <p>⚠️🔥💰</p><br />
+            <p>
+              <Link
+                href="https://www.patreon.com/isnowillegal"
+                target="_blank"
+              >
+                <span>This website will shutdown if we cant pay the server costs.</span><br />
+                <span>Click to for more info about donation.</span>
+
+              </Link>
+            </p>
+          </DonationHeader>
           <MessageHeader>
             {message && <p>{message}</p>}
           </MessageHeader>
