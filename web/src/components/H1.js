@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export default styled.h1`
   margin-bottom: 24px;
@@ -10,4 +10,4 @@ export default styled.h1`
   @media (max-width: 600px) {
     font-size: 30px;
   }
-`;
+`

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export default styled.div`
   margin: auto;
@@ -12,4 +12,4 @@ export default styled.div`
       flex: 1;
       width: 100%;
   }
-`;
+`

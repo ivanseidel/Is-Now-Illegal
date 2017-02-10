@@ -1,6 +1,6 @@
 /* global ga */
 
-import React from 'react';
+import React from 'react'
 
 const trackLinkClick = (props, next) => () => {
   const {
@@ -8,8 +8,8 @@ const trackLinkClick = (props, next) => () => {
     gaEventAction,
     gaEventLabel,
     gaEventValue,
-    href,
-  } = props;
+    href
+  } = props
 
   if (typeof ga === 'function') {
     ga(
@@ -20,13 +20,13 @@ const trackLinkClick = (props, next) => () => {
       gaEventLabel || href,
       gaEventValue,
       next,
-    );
+    )
   }
 
   if (typeof next === 'function') {
-    next(props);
+    next(props)
   }
-};
+}
 
 const Link = (
   {
@@ -55,12 +55,12 @@ const Link = (
   >
     {children}
   </a>
-);
+)
 
 Link.propTypes = {
   children: React.PropTypes.oneOfType([
     React.PropTypes.element,
-    React.PropTypes.string,
+    React.PropTypes.string
   ]).isRequired,
   gaEventCategory: React.PropTypes.string,
   gaEventAction: React.PropTypes.string,
@@ -68,8 +68,8 @@ Link.propTypes = {
   gaEventValue: React.PropTypes.string,
   href: React.PropTypes.string.isRequired,
   onClick: React.PropTypes.func,
-  track: React.PropTypes.bool,
-};
+  track: React.PropTypes.bool
+}
 
 Link.defaultProps = {
   gaEventCategory: 'link',
@@ -77,7 +77,7 @@ Link.defaultProps = {
   gaEventLabel: undefined,
   gaEventValue: undefined,
   onClick: undefined,
-  track: true,
-};
+  track: true
+}
 
-export default Link;
+export default Link

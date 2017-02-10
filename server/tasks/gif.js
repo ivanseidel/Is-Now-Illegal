@@ -1,3 +1,5 @@
+/* global app */
+
 const fs = require('fs')
 const path = require('path')
 const async = require('async')
@@ -17,7 +19,7 @@ module.exports = (data, progress, resolve, reject) => {
 
   // Validate gif word
   let validChars = /^[a-zA-Z0-9\s]+$/i
-  if(!gifWord || gifWord.length > 10 || !validChars.test(gifWord)){
+  if (!gifWord || gifWord.length > 10 || !validChars.test(gifWord)) {
     console.log(`[${gifWord}] Rejecting(validation): `, data)
     return reject()
   }
@@ -43,9 +45,9 @@ module.exports = (data, progress, resolve, reject) => {
 
       gifRef.once('value', (snapshot) => {
         if (snapshot.val() && snapshot.val().url) {
-          gifRef.child('views').transaction(function (current_value) {
-            return (current_value || 0) + 1;
-          });
+          gifRef.child('views').transaction(function (currVal) {
+            return (currVal || 0) + 1
+          })
 
           console.log(`[${gifWord}] Gif already cached. skipping`)
           return next('ok')
@@ -69,8 +71,8 @@ module.exports = (data, progress, resolve, reject) => {
 
       gifsStorage.upload(filePath, {
         destination: 'gifs/' + fileName,
-        gzip: true,
-      }, next);  
+        gzip: true
+      }, next)
     },
 
     // Create object in database
@@ -78,12 +80,12 @@ module.exports = (data, progress, resolve, reject) => {
       console.log(`[${gifWord}] Saving to database`)
 
       gifRef.set({
-        url: 'https://storage.googleapis.com/is-now-illegal.appspot.com/gifs/'+fileName,
+        url: 'https://storage.googleapis.com/is-now-illegal.appspot.com/gifs/' + fileName,
         views: 1,
         created: new Date(),
         processTime: Date.now() - startTime
       }, next)
-    },
+    }
 
   ], function (err) {
     // Get final timestamp
@@ -96,7 +98,7 @@ module.exports = (data, progress, resolve, reject) => {
     fs.unlink(filePath, () => {})
 
     // Check for errors
-    if (err && err != 'ok') {
+    if (err && err !== 'ok') {
       console.log(`[${gifWord}] Error processing gif:`, err)
       return reject()
     }

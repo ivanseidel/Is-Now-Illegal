@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import { padding } from '../styles/variables';
+import { padding } from '../styles/variables'
 
 export default styled.footer`
   line-height: 24px;
@@ -8,4 +8,4 @@ export default styled.footer`
   text-align: center;
   font-size: 20px;
   color: #fff;
-`;
+`

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export default styled.input`
   padding: 10px 20px;
@@ -16,4 +16,4 @@ export default styled.input`
   @media (max-width: 600px) {
     text-align: center;
   }
-`;
+`
