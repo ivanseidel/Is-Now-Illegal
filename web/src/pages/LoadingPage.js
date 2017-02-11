@@ -48,7 +48,7 @@ class LoadingPage extends Component {
     this.timeout = setTimeout(() => {
       setMessage('We are having too many access! If it does not work for you, please bookmark this site and come back later.');
       push(`/#${subject}`);
-    }, 10000);
+    }, 15000);
   };
 
   componentWillUnmount = () => {
