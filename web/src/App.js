@@ -17,7 +17,7 @@ const basename = window.location.hostname.indexOf('github') >= 0 &&
   : undefined;
 
 const DonationHeader = styled.header`
-  background-color: #e6461a;
+  background-color: ${colors.red};
   padding: ${2 * padding}px ${padding}px;
   text-align: center;
 
@@ -57,15 +57,14 @@ export default class extends Component {
       <Router basename={basename}>
         <PageContainer background={backgroundColor}>
           <DonationHeader>
-            <p>⚠️🔥💰</p><br />
             <p>
+              <span>⚠️&nbsp;</span>
               <Link
                 href="https://www.patreon.com/isnowillegal"
                 target="_blank"
               >
-                <span>This website will shutdown if we cant pay the server costs.</span><br />
-                <span>Click here for more info about donation.</span>
-
+                <span>{"This website will shutdown if we can't pay the server costs."}</span><br />
+                <span>Click here for more info about how to donate a few bucks.</span>
               </Link>
             </p>
           </DonationHeader>
