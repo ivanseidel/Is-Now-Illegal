@@ -1,15 +1,15 @@
 export const colors = {
   blue: '#2186c8',
-  red: '#ed2329',
-};
+  red: '#ed2329'
+}
 
-export const backgroundColor = colors.blue;
-export const foregroundColor = '#fff';
+export const backgroundColor = colors.blue
+export const foregroundColor = '#fff'
 
 export const button = {
   backgroundColor: '#ed2127',
-  foregroundColor: '#fff',
-};
+  foregroundColor: '#fff'
+}
 
-export const padding = 10;
-export const radius = 8;
+export const padding = 10
+export const radius = 8

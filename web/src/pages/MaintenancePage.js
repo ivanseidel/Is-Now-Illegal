@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
-import CenterBox from '../components/CenterBox';
-import H1 from '../components/H1';
-import Page from '../components/Page';
+import CenterBox from '../components/CenterBox'
+import H1 from '../components/H1'
+import Page from '../components/Page'
 
 export default () => (
   <Page>
@@ -12,4 +12,4 @@ export default () => (
       </H1>
     </CenterBox>
   </Page>
-);
+)
