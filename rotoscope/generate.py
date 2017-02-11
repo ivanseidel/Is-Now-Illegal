@@ -68,7 +68,7 @@ frameImages[0].save(gifFile, save_all=True, append_images=frameImages, loop=0)
 
 # Compress to optimize file size
 call([
-	'../lib/giflossy/gifsicle',
+	'../lib/giflossy/gifsicle-debian6',
 	'-O3',
 	'--lossy=200',
 	'--colors',
