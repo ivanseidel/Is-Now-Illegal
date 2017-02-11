@@ -5,6 +5,7 @@ import json
 import time
 import numpy as np
 from PIL import Image
+from subprocess import call
 
 # Change working directory to here
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -14,12 +15,12 @@ import rotoscope
 
 # Reads the path from cmd
 if len(sys.argv) != 4:
-	print("Usage: python generate.py <text> <image-folder> <destination-file>")
+	print('Usage: python generate.py <text> <image-folder> <destination-file>')
 	exit()
 text = sys.argv[1]
 folder = sys.argv[2]
-jsonPath = os.path.join(folder, 'frames.json')
 gifFile = sys.argv[3]
+jsonPath = os.path.join(folder, 'frames.json')
 
 # Load frames
 frames = json.load(open(jsonPath))
@@ -64,6 +65,18 @@ for frame in frames:
 	
 # Saving...
 frameImages[0].save(gifFile, save_all=True, append_images=frameImages, loop=0)
+
+# Compress to optimize file size
+call([
+	'../lib/giflossy/gifsicle',
+	'-O3',
+	'--lossy=200',
+	'--colors',
+	'240',
+	'-o',
+	gifFile,
+	gifFile
+])
 
 # Print process duration
 timeEnd = int(time.time() * 1000)
