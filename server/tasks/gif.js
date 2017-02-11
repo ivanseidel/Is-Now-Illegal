@@ -45,7 +45,8 @@ module.exports = (data, progress, resolve, reject) => {
       console.log(`[${gifWord}] Verify cache`)
 
       gifRef.once('value', (snapshot) => {
-        dbObject = snapshot.val()
+        // Store in variable
+        dbObject = snapshot.val() || dbObject
 
         if (dbObject && dbObject.url) {
           gifRef.child('views').transaction(function (current_value) {
